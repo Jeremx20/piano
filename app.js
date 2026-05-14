@@ -74,83 +74,190 @@ function renderDiagramsSection(lessonId) {
 }
 
 // ============================================================
-// WEB AUDIO — play chord notes
+// AUDIO — Tone.js + Salamander Grand Piano samples
+// Real piano sound, samples cached after first load
 // ============================================================
 
-let audioCtx = null;
-function getAudioCtx() {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let pianoSampler = null;
+let pianoLoaded = false;
+let pianoLoading = false;
+let pendingNotes = []; // queue notes pressed while loading
+
+// Initialize the sampler (called on first user interaction for iOS audio policy)
+function initPiano() {
+  if (pianoSampler || pianoLoading) return;
+  if (typeof Tone === 'undefined') {
+    console.warn('Tone.js not loaded yet');
+    return;
   }
-  // Resume context on iOS (needs user interaction)
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-  return audioCtx;
+
+  pianoLoading = true;
+  showLoadingIndicator();
+
+  // Start the audio context (required for iOS)
+  Tone.start();
+
+  // Salamander Grand Piano samples from tonejs.github.io
+  // We load a subset of samples; Tone.js interpolates the rest.
+  pianoSampler = new Tone.Sampler({
+    urls: {
+      "A0": "A0.mp3",
+      "C1": "C1.mp3",
+      "D#1": "Ds1.mp3",
+      "F#1": "Fs1.mp3",
+      "A1": "A1.mp3",
+      "C2": "C2.mp3",
+      "D#2": "Ds2.mp3",
+      "F#2": "Fs2.mp3",
+      "A2": "A2.mp3",
+      "C3": "C3.mp3",
+      "D#3": "Ds3.mp3",
+      "F#3": "Fs3.mp3",
+      "A3": "A3.mp3",
+      "C4": "C4.mp3",
+      "D#4": "Ds4.mp3",
+      "F#4": "Fs4.mp3",
+      "A4": "A4.mp3",
+      "C5": "C5.mp3",
+      "D#5": "Ds5.mp3",
+      "F#5": "Fs5.mp3",
+      "A5": "A5.mp3",
+      "C6": "C6.mp3",
+      "D#6": "Ds6.mp3",
+      "F#6": "Fs6.mp3",
+      "A6": "A6.mp3",
+      "C7": "C7.mp3",
+      "D#7": "Ds7.mp3",
+      "F#7": "Fs7.mp3",
+      "A7": "A7.mp3",
+      "C8": "C8.mp3"
+    },
+    release: 1.2,
+    baseUrl: "https://tonejs.github.io/audio/salamander/",
+    onload: () => {
+      pianoLoaded = true;
+      pianoLoading = false;
+      hideLoadingIndicator();
+      console.log('Piano samples loaded');
+      // Flush any pending notes
+      while (pendingNotes.length > 0) {
+        const { note, octave, duration } = pendingNotes.shift();
+        playNoteImmediate(note, octave, duration);
+      }
+    },
+    onerror: (err) => {
+      pianoLoading = false;
+      hideLoadingIndicator();
+      console.warn('Failed to load piano samples:', err);
+    }
+  }).toDestination();
 }
 
-// Get the frequency for a given note + octave (e.g., 'C', 4 → 261.63 Hz)
-function noteToFreq(noteName, octave = 4) {
-  const semitone = noteToSemitone(noteName);
-  // A4 = 440 Hz, A4 = MIDI 69
-  // MIDI note = octave * 12 + semitone (with C0 = 12, C4 = 60)
-  const midi = (octave + 1) * 12 + semitone;
-  return 440 * Math.pow(2, (midi - 69) / 12);
+function showLoadingIndicator() {
+  if (document.getElementById('audio-loading')) return;
+  const div = document.createElement('div');
+  div.id = 'audio-loading';
+  div.style.cssText = 'position:fixed;top:env(safe-area-inset-top, 20px);left:50%;transform:translateX(-50%);background:rgba(20,20,27,0.95);color:#d4a857;padding:10px 18px;border-radius:20px;font-size:12px;font-family:inherit;border:1px solid rgba(212,168,87,0.3);z-index:1000;backdrop-filter:blur(20px);font-weight:500;letter-spacing:0.5px;';
+  div.textContent = '♪ Chargement du piano...';
+  document.body.appendChild(div);
 }
 
-// Play a single note with a piano-like sound (multiple harmonics, ADSR envelope)
+function hideLoadingIndicator() {
+  const div = document.getElementById('audio-loading');
+  if (div) {
+    div.style.opacity = '0';
+    div.style.transition = 'opacity 0.4s';
+    setTimeout(() => div.remove(), 400);
+  }
+}
+
+// Convert internal note name format ("C", "Eb", "F#") to Tone.js format
+// (Tone.js uses sharp notation: "C", "D#", etc.)
+function noteToToneFormat(noteName, octave) {
+  // Normalize to sharps
+  const clean = noteName.replace(/[0-9]/g, '').trim();
+  const semi = _NOTE_TO_SEMI[clean];
+  if (semi === undefined) return null;
+  const sharpName = SHARP_NAMES[semi];
+  return `${sharpName}${octave}`;
+}
+
+const SHARP_NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+
+// Public API: play a single note
 function playNote(noteName, octave = 4, duration = 1.2) {
-  const ctx = getAudioCtx();
-  const now = ctx.currentTime;
-  const freq = noteToFreq(noteName, octave);
+  // Initialize on first call (handles iOS user-gesture requirement)
+  if (!pianoSampler && !pianoLoading) {
+    initPiano();
+  }
 
-  // Master gain (envelope)
-  const gain = ctx.createGain();
-  gain.gain.setValueAtTime(0, now);
-  gain.gain.linearRampToValueAtTime(0.25, now + 0.01); // attack
-  gain.gain.exponentialRampToValueAtTime(0.15, now + 0.15); // decay
-  gain.gain.exponentialRampToValueAtTime(0.05, now + duration * 0.7); // sustain
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration); // release
-  gain.connect(ctx.destination);
+  if (!pianoLoaded) {
+    // Queue the note to play once loaded
+    pendingNotes.push({ note: noteName, octave, duration });
+    return;
+  }
 
-  // Multiple oscillators for richer tone
-  const harmonics = [
-    { freq: freq, gain: 0.6, type: 'triangle' },
-    { freq: freq * 2, gain: 0.2, type: 'sine' },
-    { freq: freq * 3, gain: 0.1, type: 'sine' },
-    { freq: freq * 4, gain: 0.05, type: 'sine' }
-  ];
-  for (const h of harmonics) {
-    const osc = ctx.createOscillator();
-    const g = ctx.createGain();
-    osc.frequency.value = h.freq;
-    osc.type = h.type;
-    g.gain.value = h.gain;
-    osc.connect(g);
-    g.connect(gain);
-    osc.start(now);
-    osc.stop(now + duration);
+  playNoteImmediate(noteName, octave, duration);
+}
+
+function playNoteImmediate(noteName, octave, duration) {
+  if (!pianoSampler) return;
+  const toneNote = noteToToneFormat(noteName, octave);
+  if (!toneNote) return;
+  try {
+    pianoSampler.triggerAttackRelease(toneNote, duration);
+  } catch (e) {
+    console.warn('playNote error:', e);
   }
 }
 
-// Play a chord: arpeggio with slight delay so notes don't clash
+// Public API: play a chord (with bass note first, then arpeggio)
 function playChord(noteData) {
   const { highlight = [], bassNote = null } = noteData;
-  const ctx = getAudioCtx();
 
-  // Bass first (octave 3), then chord notes (octave 4), slight stagger
-  if (bassNote) {
-    playNote(bassNote, 3, 1.6);
+  if (!pianoSampler && !pianoLoading) {
+    initPiano();
   }
+
+  // If not loaded, queue
+  if (!pianoLoaded) {
+    if (bassNote) pendingNotes.push({ note: bassNote, octave: 3, duration: 2.5 });
+    highlight.forEach((note, i) => {
+      pendingNotes.push({ note, octave: getChordOctave(note, highlight, i), duration: 2.2 });
+    });
+    return;
+  }
+
+  // Bass note first (lower)
+  if (bassNote) {
+    playNoteImmediate(bassNote, 3, 2.5);
+  }
+
+  // Chord notes — slight stagger for a natural strum
   highlight.forEach((note, i) => {
-    // Determine octave: if note semitone < bass semitone or first chord, octave 4; otherwise 4 or 5
-    const semi = noteToSemitone(note);
-    const baseOctave = 4;
-    setTimeout(() => playNote(note, baseOctave, 1.4), i * 25);
+    const octave = getChordOctave(note, highlight, i);
+    setTimeout(() => playNoteImmediate(note, octave, 2.2), i * 18);
   });
 }
 
-// Note helpers (also defined in piano.js but needed here)
+// Determine the right octave for a chord note based on its position in the chord
+// Goal: notes should ascend naturally from the root
+function getChordOctave(note, allNotes, idx) {
+  if (idx === 0) return 4; // root in C4
+  // For subsequent notes, if semitone < previous, bump octave
+  let currentOct = 4;
+  let prevSemi = -1;
+  for (let i = 0; i <= idx; i++) {
+    const s = noteToSemitone(allNotes[i]);
+    if (prevSemi !== -1 && s <= prevSemi) {
+      currentOct++;
+    }
+    prevSemi = s;
+  }
+  return currentOct;
+}
+
+// Note helpers
 const _NOTE_TO_SEMI = {
   'C': 0, 'B#': 0, 'C#': 1, 'Db': 1, 'D': 2, 'D#': 3, 'Eb': 3,
   'E': 4, 'Fb': 4, 'F': 5, 'E#': 5, 'F#': 6, 'Gb': 6, 'G': 7,
@@ -356,6 +463,10 @@ function renderHome() {
 
 function openModule(moduleId) {
   state.currentModule = moduleId;
+  // Pre-load piano samples in background on first module open
+  if (!pianoSampler && !pianoLoading) {
+    initPiano();
+  }
   const module = COURSE_DATA.modules.find(m => m.id === moduleId);
   if (!module) return goHome();
 
