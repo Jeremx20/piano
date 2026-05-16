@@ -369,18 +369,323 @@ function formatText(text) {
 }
 
 // ============================================================
-// VIEW MANAGEMENT
+// METRONOME
 // ============================================================
+
+let metronomeBpm = 80;
+let metronomeIsPlaying = false;
+let metronomeLoop = null;
+let metronomeBeat = 0;
+let metronomeSynth = null;
+
+function initMetronomeSynth() {
+  if (metronomeSynth) return metronomeSynth;
+  if (typeof Tone === 'undefined') return null;
+  metronomeSynth = new Tone.MembraneSynth({
+    pitchDecay: 0.008,
+    octaves: 2,
+    envelope: { attack: 0.001, decay: 0.15, sustain: 0, release: 0.1 }
+  }).toDestination();
+  metronomeSynth.volume.value = -8;
+  return metronomeSynth;
+}
+
+function toggleMetronome() {
+  const panel = document.getElementById('metronome-panel');
+  panel.classList.toggle('hidden');
+}
+
+function updateMetronomeBpm(bpm) {
+  metronomeBpm = parseInt(bpm, 10);
+  document.getElementById('metronome-bpm').textContent = metronomeBpm;
+  if (metronomeIsPlaying && typeof Tone !== 'undefined') {
+    Tone.Transport.bpm.value = metronomeBpm;
+  }
+}
+
+function setMetronomeBpm(bpm) {
+  updateMetronomeBpm(bpm);
+  document.getElementById('metronome-slider').value = bpm;
+}
+
+function toggleMetronomePlay() {
+  if (typeof Tone === 'undefined') return;
+  Tone.start();
+  initMetronomeSynth();
+
+  if (metronomeIsPlaying) {
+    Tone.Transport.stop();
+    Tone.Transport.cancel();
+    metronomeIsPlaying = false;
+    document.getElementById('metronome-play-icon').textContent = '▶';
+    document.getElementById('metronome-play-text').textContent = 'Démarrer';
+    document.getElementById('metronome-play').classList.remove('playing');
+    document.getElementById('metronome-fab').classList.remove('active');
+    metronomeBeat = 0;
+  } else {
+    Tone.Transport.bpm.value = metronomeBpm;
+    metronomeBeat = 0;
+    Tone.Transport.scheduleRepeat((time) => {
+      // Beat 1 gets a higher pitch
+      const isOne = (metronomeBeat % 4) === 0;
+      metronomeSynth.triggerAttackRelease(isOne ? 'C5' : 'C4', '32n', time);
+      metronomeBeat++;
+    }, '4n');
+    Tone.Transport.start();
+    metronomeIsPlaying = true;
+    document.getElementById('metronome-play-icon').textContent = '⏸';
+    document.getElementById('metronome-play-text').textContent = 'Arrêter';
+    document.getElementById('metronome-play').classList.add('playing');
+    document.getElementById('metronome-fab').classList.add('active');
+  }
+}
+
+// ============================================================
+// PROGRESSION PLAYER
+// ============================================================
+
+const activeProgression = {
+  id: null,
+  index: 0,
+  intervalId: null,
+  isPlaying: false,
+  bpm: 80,
+  data: null
+};
+
+function renderProgressionsSection(lessonId) {
+  if (typeof LESSON_PROGRESSIONS === 'undefined') return '';
+  const progs = LESSON_PROGRESSIONS[lessonId];
+  if (!progs || progs.length === 0) return '';
+
+  const html = progs.map((p, idx) => {
+    const progId = `prog-${lessonId.replace('.','-')}-${idx}`;
+    const chordsHTML = p.chords.map((c, ci) =>
+      `<span class="progression-chord-chip" data-prog="${progId}" data-idx="${ci}">${c.name}</span>`
+    ).join('');
+    const progData = JSON.stringify(p).replace(/"/g, '&quot;');
+    return `
+      <div class="progression-player">
+        <div class="progression-name">${p.name}</div>
+        <div class="progression-chords" id="${progId}-chords">${chordsHTML}</div>
+        <div class="progression-controls">
+          <button class="progression-play-btn"
+                  data-prog-id="${progId}"
+                  data-prog="${progData}"
+                  onclick="toggleProgressionPlay(this)" aria-label="Jouer">▶</button>
+          <span class="progression-bpm"><strong>${p.bpm}</strong> BPM</span>
+          <div class="progression-tempo-buttons">
+            <button class="tempo-btn" onclick="adjustProgressionTempo('${progId}', -10)" aria-label="Plus lent">−</button>
+            <button class="tempo-btn" onclick="adjustProgressionTempo('${progId}', 10)" aria-label="Plus rapide">+</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <section class="lesson-section">
+      <div class="lesson-section-title">Joue-les au tempo</div>
+      <div class="progressions-container">${html}</div>
+    </section>
+  `;
+}
+
+function toggleProgressionPlay(btn) {
+  const progId = btn.getAttribute('data-prog-id');
+
+  // If another progression is playing, stop it
+  if (activeProgression.isPlaying && activeProgression.id !== progId) {
+    stopActiveProgression();
+  }
+
+  if (activeProgression.isPlaying && activeProgression.id === progId) {
+    stopActiveProgression();
+    return;
+  }
+
+  // Parse progression data
+  const raw = btn.getAttribute('data-prog').replace(/&quot;/g, '"');
+  const data = JSON.parse(raw);
+
+  // Init piano if needed
+  if (!pianoSampler && !pianoLoading) initPiano();
+
+  activeProgression.id = progId;
+  activeProgression.index = 0;
+  activeProgression.isPlaying = true;
+  activeProgression.bpm = data.bpm;
+  activeProgression.data = data;
+
+  btn.classList.add('playing');
+  btn.textContent = '⏸';
+
+  playNextChordInProgression();
+}
+
+function playNextChordInProgression() {
+  if (!activeProgression.isPlaying || !activeProgression.data) return;
+
+  const chord = activeProgression.data.chords[activeProgression.index];
+  if (!chord) return;
+
+  // Highlight current chord
+  document.querySelectorAll(`.progression-chord-chip[data-prog="${activeProgression.id}"]`).forEach(c => {
+    c.classList.remove('active');
+  });
+  const activeChip = document.querySelector(
+    `.progression-chord-chip[data-prog="${activeProgression.id}"][data-idx="${activeProgression.index}"]`
+  );
+  if (activeChip) activeChip.classList.add('active');
+
+  // Play the chord
+  playChord({ highlight: chord.notes, bassNote: chord.bassNote || null });
+
+  // Schedule next chord
+  // duration in beats; beat duration in ms = 60000 / bpm
+  const beatMs = 60000 / activeProgression.bpm;
+  const chordDurationMs = chord.duration * beatMs;
+
+  activeProgression.intervalId = setTimeout(() => {
+    activeProgression.index = (activeProgression.index + 1) % activeProgression.data.chords.length;
+    playNextChordInProgression();
+  }, chordDurationMs);
+}
+
+function stopActiveProgression() {
+  if (activeProgression.intervalId) clearTimeout(activeProgression.intervalId);
+  if (activeProgression.id) {
+    const btn = document.querySelector(`.progression-play-btn[data-prog-id="${activeProgression.id}"]`);
+    if (btn) {
+      btn.classList.remove('playing');
+      btn.textContent = '▶';
+    }
+    document.querySelectorAll(`.progression-chord-chip[data-prog="${activeProgression.id}"]`).forEach(c => {
+      c.classList.remove('active');
+    });
+  }
+  activeProgression.id = null;
+  activeProgression.index = 0;
+  activeProgression.isPlaying = false;
+  activeProgression.intervalId = null;
+}
+
+function adjustProgressionTempo(progId, delta) {
+  if (activeProgression.id === progId && activeProgression.isPlaying) {
+    activeProgression.bpm = Math.max(40, Math.min(200, activeProgression.bpm + delta));
+    // Update display
+    const display = document.querySelector(`.progression-play-btn[data-prog-id="${progId}"]`)
+      .parentElement.querySelector('.progression-bpm strong');
+    if (display) display.textContent = activeProgression.bpm;
+  } else {
+    // Find the static bpm display
+    const btn = document.querySelector(`.progression-play-btn[data-prog-id="${progId}"]`);
+    if (!btn) return;
+    const raw = btn.getAttribute('data-prog').replace(/&quot;/g, '"');
+    const data = JSON.parse(raw);
+    data.bpm = Math.max(40, Math.min(200, data.bpm + delta));
+    btn.setAttribute('data-prog', JSON.stringify(data).replace(/"/g, '&quot;'));
+    btn.parentElement.querySelector('.progression-bpm strong').textContent = data.bpm;
+  }
+}
+
+// ============================================================
+// REFERENCES (YouTube links)
+// ============================================================
+
+function renderReferencesSection(lessonId) {
+  if (typeof LESSON_REFERENCES === 'undefined') return '';
+  const refs = LESSON_REFERENCES[lessonId];
+  if (!refs || refs.length === 0) return '';
+
+  const html = refs.map(r => `
+    <a href="${r.url}" target="_blank" rel="noopener" class="reference-card">
+      <div class="reference-icon">▶</div>
+      <div class="reference-content">
+        <div class="reference-title">${r.title}</div>
+        <div class="reference-channel">${r.channel}</div>
+      </div>
+      <div class="reference-external">↗</div>
+    </a>
+  `).join('');
+
+  return `
+    <section class="lesson-section">
+      <div class="lesson-section-title">À écouter / regarder</div>
+      <div class="references-section">${html}</div>
+    </section>
+  `;
+}
+
+// ============================================================
+// REPERTOIRE VIEW
+// ============================================================
+
+function showRepertoire() {
+  renderRepertoire();
+  showView('view-repertoire');
+}
+
+function renderRepertoire() {
+  if (typeof SONG_REPERTOIRE === 'undefined') return;
+  const levels = ['beginner', 'intermediate', 'advanced', 'master'];
+
+  const html = levels.map(lvl => {
+    const data = SONG_REPERTOIRE[lvl];
+    if (!data) return '';
+    const stars = '★'.repeat(['beginner','intermediate','advanced','master'].indexOf(lvl) + 1);
+    const songsHTML = data.songs.map(s => `
+      <div class="song-card">
+        <div class="song-header">
+          <div class="song-info">
+            <div class="song-title">${s.title}</div>
+            <div class="song-artist">${s.artist}</div>
+          </div>
+          <div class="song-difficulty">${'★'.repeat(s.difficulty)}</div>
+        </div>
+        <div class="song-meta">
+          <span><strong>Tonalité:</strong> ${s.key}</span>
+        </div>
+        <div class="song-progression">${s.progression}</div>
+        <div class="song-notes">${s.notes}</div>
+        <a href="${s.searchUrl}" target="_blank" rel="noopener" class="song-link">
+          ▶ Tutoriel YouTube
+        </a>
+      </div>
+    `).join('');
+    return `
+      <div class="repertoire-level">
+        <div class="level-header">
+          <div class="level-title">${data.label}</div>
+          <div class="level-stars">${stars}</div>
+        </div>
+        <div class="level-desc">${data.description}</div>
+        ${songsHTML}
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('repertoire-content').innerHTML = html;
+}
+
+
 
 function showView(viewId) {
   document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
   document.getElementById(viewId).classList.remove('hidden');
   window.scrollTo(0, 0);
 
+  // Stop any active progression when switching views
+  if (typeof stopActiveProgression === 'function') {
+    stopActiveProgression();
+  }
+
   // Update nav
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (viewId === 'view-stats') {
     document.getElementById('nav-stats').classList.add('active');
+  } else if (viewId === 'view-repertoire') {
+    document.getElementById('nav-repertoire').classList.add('active');
   } else {
     document.getElementById('nav-home').classList.add('active');
   }
@@ -548,6 +853,8 @@ function openLesson(lessonId) {
 
     ${renderDiagramsSection(lessonId)}
 
+    ${renderProgressionsSection(lessonId)}
+
     <section class="lesson-section">
       <div class="lesson-section-title">Exercice</div>
       <div class="exercise-box">
@@ -561,6 +868,8 @@ function openLesson(lessonId) {
         <div class="takeaway-text">${foundLesson.keyTakeaway}</div>
       </div>
     </section>
+
+    ${renderReferencesSection(lessonId)}
 
     <div class="lesson-actions">
       <button class="btn ${isCompleted ? 'completed' : 'btn-primary'}"

@@ -1217,6 +1217,456 @@ body {
   opacity: 0.85;
 }
 
+/* === Metronome === */
+.metronome-fab {
+  position: fixed;
+  bottom: calc(90px + env(safe-area-inset-bottom));
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  box-shadow: 0 4px 16px rgba(212, 168, 87, 0.3), 0 2px 8px rgba(0,0,0,0.4);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.metronome-fab:hover { transform: scale(1.05); }
+.metronome-fab.active {
+  background: var(--crimson);
+  animation: pulse 0.5s infinite alternate;
+}
+
+.metronome-panel {
+  position: fixed;
+  bottom: calc(160px + env(safe-area-inset-bottom));
+  right: 20px;
+  width: 280px;
+  background: var(--ink-2);
+  border: 1px solid var(--gold-deep);
+  border-radius: 16px;
+  padding: 20px;
+  z-index: 95;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  animation: slideUp 0.25s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.metronome-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.metronome-title {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.metronome-close {
+  background: none;
+  border: none;
+  color: var(--paper-muted);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metronome-bpm-display {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+#metronome-bpm {
+  font-family: 'Fraunces', serif;
+  font-size: 48px;
+  color: var(--paper);
+  font-weight: 400;
+  font-variation-settings: 'opsz' 144;
+  line-height: 1;
+}
+
+.bpm-label {
+  display: block;
+  font-size: 10px;
+  color: var(--paper-muted);
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+
+.metronome-slider {
+  width: 100%;
+  margin-bottom: 12px;
+  accent-color: var(--gold);
+}
+
+.metronome-presets {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.bpm-preset {
+  flex: 1;
+  background: var(--ink-3);
+  border: 1px solid var(--line-strong);
+  color: var(--paper-dim);
+  padding: 6px 0;
+  border-radius: 8px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.bpm-preset:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.metronome-play-btn {
+  width: 100%;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  padding: 12px;
+  border-radius: 24px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.metronome-play-btn.playing {
+  background: var(--crimson);
+  color: #fff;
+}
+
+/* === Progression Player === */
+.progression-player {
+  background: linear-gradient(135deg, rgba(212, 168, 87, 0.08), rgba(212, 168, 87, 0.02));
+  border: 1px solid rgba(212, 168, 87, 0.2);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.progression-name {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  color: var(--paper);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.progression-chords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.progression-chord-chip {
+  background: var(--ink-3);
+  border: 1px solid var(--line-strong);
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  color: var(--paper);
+  transition: all 0.15s;
+}
+
+.progression-chord-chip.active {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
+  transform: scale(1.08);
+}
+
+.progression-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progression-play-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.progression-play-btn.playing {
+  background: var(--crimson);
+  color: #fff;
+}
+
+.progression-bpm {
+  font-size: 12px;
+  color: var(--paper-muted);
+  letter-spacing: 1px;
+}
+
+.progression-bpm strong {
+  color: var(--gold-bright);
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.progression-tempo-buttons {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.tempo-btn {
+  background: var(--ink-3);
+  border: 1px solid var(--line);
+  color: var(--paper-muted);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.tempo-btn:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+/* === YouTube References === */
+.references-section {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reference-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.reference-card:hover {
+  border-color: var(--crimson);
+  background: var(--ink-3);
+}
+
+.reference-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(196, 69, 105, 0.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--crimson);
+  flex-shrink: 0;
+}
+
+.reference-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.reference-title {
+  font-size: 14px;
+  color: var(--paper);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.reference-channel {
+  font-size: 11px;
+  color: var(--paper-muted);
+  letter-spacing: 0.5px;
+}
+
+.reference-external {
+  color: var(--paper-muted);
+  font-size: 12px;
+}
+
+/* === Repertoire View === */
+.repertoire-level {
+  margin-bottom: 32px;
+}
+
+.level-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.level-title {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  color: var(--paper);
+  font-weight: 500;
+}
+
+.level-stars {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+
+.level-desc {
+  font-size: 13px;
+  color: var(--paper-muted);
+  font-style: italic;
+  margin-bottom: 16px;
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+}
+
+.song-card {
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 10px;
+  transition: border-color 0.2s;
+}
+
+.song-card:hover {
+  border-color: var(--line-strong);
+}
+
+.song-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.song-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.song-title {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  color: var(--paper);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.song-artist {
+  font-size: 12px;
+  color: var(--gold);
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+.song-difficulty {
+  font-size: 10px;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.song-meta {
+  display: flex;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--paper-muted);
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.song-meta span strong {
+  color: var(--paper-dim);
+  font-weight: 500;
+}
+
+.song-progression {
+  background: var(--ink-3);
+  border-left: 2px solid var(--gold);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  color: var(--paper);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.song-notes {
+  font-size: 13px;
+  color: var(--paper-dim);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.song-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--crimson);
+  font-size: 12px;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid rgba(196, 69, 105, 0.3);
+  border-radius: 14px;
+  transition: all 0.2s;
+}
+
+.song-link:hover {
+  background: rgba(196, 69, 105, 0.1);
+  border-color: var(--crimson);
+}
+
 /* === Print / PDF view === */
 @media print {
   .nav-bottom, .back-button, .lesson-actions { display: none; }
@@ -1286,6 +1736,16 @@ body {
       <button class="danger-btn" onclick="resetProgress()">Réinitialiser ma progression</button>
     </div>
   </div>
+
+  <!-- REPERTOIRE VIEW -->
+  <div id="view-repertoire" class="view hidden">
+    <header class="hero">
+      <div class="hero-eyebrow">Le répertoire</div>
+      <h1 class="hero-title">Morceaux à <em>apprendre</em></h1>
+      <p class="hero-subtitle">Du standard incontournable aux pièces avancées. Choisis ton niveau et bosse un morceau jusqu'à le maîtriser.</p>
+    </header>
+    <div id="repertoire-content"></div>
+  </div>
 </div>
 
 <!-- Bottom navigation -->
@@ -1295,12 +1755,46 @@ body {
       <span class="nav-item-icon">♪</span>
       <span>Cours</span>
     </button>
+    <button class="nav-item" id="nav-repertoire" onclick="showRepertoire()">
+      <span class="nav-item-icon">♫</span>
+      <span>Morceaux</span>
+    </button>
     <button class="nav-item" id="nav-stats" onclick="showStats()">
       <span class="nav-item-icon">◆</span>
       <span>Progression</span>
     </button>
   </div>
 </nav>
+
+<!-- Metronome floating button -->
+<button id="metronome-fab" class="metronome-fab" onclick="toggleMetronome()" aria-label="Métronome">
+  <span class="metronome-icon">⏱</span>
+</button>
+
+<!-- Metronome panel -->
+<div id="metronome-panel" class="metronome-panel hidden">
+  <div class="metronome-header">
+    <span class="metronome-title">Métronome</span>
+    <button class="metronome-close" onclick="toggleMetronome()" aria-label="Fermer">×</button>
+  </div>
+  <div class="metronome-bpm-display">
+    <span id="metronome-bpm">80</span>
+    <span class="bpm-label">BPM</span>
+  </div>
+  <input type="range" id="metronome-slider" class="metronome-slider"
+         min="40" max="200" value="80" step="1"
+         oninput="updateMetronomeBpm(this.value)">
+  <div class="metronome-presets">
+    <button class="bpm-preset" onclick="setMetronomeBpm(60)">60</button>
+    <button class="bpm-preset" onclick="setMetronomeBpm(80)">80</button>
+    <button class="bpm-preset" onclick="setMetronomeBpm(100)">100</button>
+    <button class="bpm-preset" onclick="setMetronomeBpm(120)">120</button>
+  </div>
+  <button id="metronome-play" class="metronome-play-btn" onclick="toggleMetronomePlay()">
+    <span id="metronome-play-icon">▶</span>
+    <span id="metronome-play-text">Démarrer</span>
+  </button>
+</div>
 
 <!-- Welcome overlay (first launch) -->
 <div id="welcome-overlay" class="welcome-overlay hidden">
@@ -1316,6 +1810,8 @@ body {
 <script src="piano.js"></script>
 <script src="circle.js"></script>
 <script src="diagrams.js"></script>
+<script src="progressions.js"></script>
+<script src="references.js"></script>
 <script src="app.js"></script>
 
 </body>
