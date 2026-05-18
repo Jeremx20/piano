@@ -642,6 +642,232 @@ const LESSON_PROGRESSIONS = {
         { name: "Cmaj9",  notes: ["C","E","G","B","D"], duration: 8 }
       ]
     }
+  ],
+
+  // ============================================================
+  // MODULE 9 — SLASH CHORDS & TRANSITIONS
+  // ============================================================
+
+  "9.2": [
+    {
+      name: "Descente avec slash chords en C (8 mesures)",
+      bpm: 70,
+      chords: [
+        { name: "Cmaj9",   notes: ["C","E","G","B","D"], duration: 4 },
+        { name: "Cmaj9/B", notes: ["C","E","G","B","D"], bassNote: "B", duration: 4 },
+        { name: "Am9",     notes: ["A","C","E","G","B"], duration: 4 },
+        { name: "Am9/G",   notes: ["A","C","E","G","B"], bassNote: "G", duration: 4 },
+        { name: "Fmaj9",   notes: ["F","A","C","E","G"], duration: 4 },
+        { name: "Fmaj9/E", notes: ["F","A","C","E","G"], bassNote: "E", duration: 4 },
+        { name: "Dm9",     notes: ["D","F","A","C","E"], duration: 4 },
+        { name: "G13",     notes: ["G","B","D","F","A"], duration: 4 }
+      ]
+    }
+  ],
+
+  "9.3": [
+    {
+      name: "Slash chords en F (basse descendante)",
+      bpm: 75,
+      chords: [
+        { name: "Fmaj9",   notes: ["F","A","C","E","G"], duration: 4 },
+        { name: "Fmaj9/E", notes: ["F","A","C","E","G"], bassNote: "E", duration: 4 },
+        { name: "Dm9",     notes: ["D","F","A","C","E"], duration: 4 },
+        { name: "Dm9/C",   notes: ["D","F","A","C","E"], bassNote: "C", duration: 4 },
+        { name: "Bbmaj9",  notes: ["Bb","D","F","A","C"], duration: 4 },
+        { name: "C7",      notes: ["C","E","G","Bb"], duration: 4 }
+      ]
+    },
+    {
+      name: "Slash chords en Bb (descente)",
+      bpm: 75,
+      chords: [
+        { name: "Bbmaj9",   notes: ["Bb","D","F","A","C"], duration: 4 },
+        { name: "Bbmaj9/A", notes: ["Bb","D","F","A","C"], bassNote: "A", duration: 4 },
+        { name: "Gm9",      notes: ["G","Bb","D","F","A"], duration: 4 },
+        { name: "Gm9/F",    notes: ["G","Bb","D","F","A"], bassNote: "F", duration: 4 },
+        { name: "Ebmaj9",   notes: ["Eb","G","Bb","D","F"], duration: 4 },
+        { name: "F13",      notes: ["F","A","C","Eb","G"], duration: 4 }
+      ]
+    }
+  ],
+
+  "9.4": [
+    {
+      name: "Slash chords en Eb (descente complète)",
+      bpm: 70,
+      chords: [
+        { name: "Ebmaj9",   notes: ["Eb","G","Bb","D","F"], duration: 4 },
+        { name: "Ebmaj9/D", notes: ["Eb","G","Bb","D","F"], bassNote: "D", duration: 4 },
+        { name: "Cm9",      notes: ["C","Eb","G","Bb","D"], duration: 4 },
+        { name: "Cm9/Bb",   notes: ["C","Eb","G","Bb","D"], bassNote: "Bb", duration: 4 },
+        { name: "Abmaj9",   notes: ["Ab","C","Eb","G","Bb"], duration: 4 },
+        { name: "Bb13",     notes: ["Bb","D","F","Ab","C"], duration: 4 }
+      ]
+    },
+    {
+      name: "Slash chords en Ab",
+      bpm: 75,
+      chords: [
+        { name: "Abmaj9",   notes: ["Ab","C","Eb","G","Bb"], duration: 4 },
+        { name: "Eb/G",     notes: ["Eb","G","Bb"], bassNote: "G", duration: 4 },
+        { name: "Fm9",      notes: ["F","Ab","C","Eb","G"], duration: 4 },
+        { name: "Db/F",     notes: ["Db","F","Ab"], bassNote: "F", duration: 4 },
+        { name: "Eb13",     notes: ["Eb","G","Bb","Db","F"], duration: 4 },
+        { name: "Abmaj9",   notes: ["Ab","C","Eb","G","Bb"], duration: 4 }
+      ]
+    }
+  ],
+
+  "9.5": [
+    {
+      name: "Basse descendante classique en C (8 mesures)",
+      bpm: 70,
+      chords: [
+        { name: "Cmaj9",    notes: ["C","E","G","B","D"], duration: 4 },
+        { name: "Cmaj9/B",  notes: ["C","E","G","B","D"], bassNote: "B", duration: 4 },
+        { name: "Am9",      notes: ["A","C","E","G","B"], duration: 4 },
+        { name: "Am9/G",    notes: ["A","C","E","G","B"], bassNote: "G", duration: 4 },
+        { name: "Fmaj9",    notes: ["F","A","C","E","G"], duration: 4 },
+        { name: "Fmaj9/E",  notes: ["F","A","C","E","G"], bassNote: "E", duration: 4 },
+        { name: "Dm9",      notes: ["D","F","A","C","E"], duration: 4 },
+        { name: "G13",      notes: ["G","B","D","F","A"], duration: 4 }
+      ]
+    },
+    {
+      name: "Hillsong style en G (basse descendante)",
+      bpm: 75,
+      chords: [
+        { name: "Gmaj9",   notes: ["G","B","D","F#","A"], duration: 4 },
+        { name: "D/F#",    notes: ["D","F#","A"], bassNote: "F#", duration: 4 },
+        { name: "Em9",     notes: ["E","G","B","D","F#"], duration: 4 },
+        { name: "Em9/D",   notes: ["E","G","B","D","F#"], bassNote: "D", duration: 4 },
+        { name: "Cmaj9",   notes: ["C","E","G","B","D"], duration: 4 },
+        { name: "G/B",     notes: ["G","B","D"], bassNote: "B", duration: 4 },
+        { name: "Am9",     notes: ["A","C","E","G","B"], duration: 4 },
+        { name: "D13",     notes: ["D","F#","A","C","E"], duration: 4 }
+      ]
+    }
+  ],
+
+  "9.6": [
+    {
+      name: "Intro Eb signature gospel (basse ascendante)",
+      bpm: 65,
+      chords: [
+        { name: "Eb",       notes: ["Eb","G","Bb"], duration: 4 },
+        { name: "Eb/F",     notes: ["Eb","G","Bb"], bassNote: "F", duration: 4 },
+        { name: "Eb/G",     notes: ["Eb","G","Bb"], bassNote: "G", duration: 4 },
+        { name: "Ab",       notes: ["Ab","C","Eb"], duration: 4 },
+        { name: "Eb/Bb",    notes: ["Eb","G","Bb"], bassNote: "Bb", duration: 4 },
+        { name: "Cm",       notes: ["C","Eb","G"], duration: 4 },
+        { name: "Bb/D",     notes: ["Bb","D","F"], bassNote: "D", duration: 4 },
+        { name: "Eb",       notes: ["Eb","G","Bb"], duration: 4 }
+      ]
+    },
+    {
+      name: "Montée gospel en C",
+      bpm: 70,
+      chords: [
+        { name: "Cmaj9",   notes: ["C","E","G","B","D"], duration: 4 },
+        { name: "Cmaj9/D", notes: ["C","E","G","B","D"], bassNote: "D", duration: 4 },
+        { name: "Cmaj9/E", notes: ["C","E","G","B","D"], bassNote: "E", duration: 4 },
+        { name: "Fmaj9",   notes: ["F","A","C","E","G"], duration: 4 },
+        { name: "Cmaj9/G", notes: ["C","E","G","B","D"], bassNote: "G", duration: 4 },
+        { name: "Am9",     notes: ["A","C","E","G","B"], duration: 4 },
+        { name: "G/B",     notes: ["G","B","D"], bassNote: "B", duration: 4 },
+        { name: "Cmaj9",   notes: ["C","E","G","B","D"], duration: 4 }
+      ]
+    }
+  ],
+
+  "9.7": [
+    {
+      name: "Pédale de tonique en C (Kirk Franklin style)",
+      bpm: 75,
+      chords: [
+        { name: "Cmaj9",   notes: ["C","E","G","B","D"], duration: 4 },
+        { name: "F/C",     notes: ["F","A","C"], bassNote: "C", duration: 4 },
+        { name: "G/C",     notes: ["G","B","D"], bassNote: "C", duration: 4 },
+        { name: "Cmaj9",   notes: ["C","E","G","B","D"], duration: 4 }
+      ]
+    },
+    {
+      name: "Pédale de dominante en C (tension)",
+      bpm: 80,
+      chords: [
+        { name: "Cmaj9/G", notes: ["C","E","G","B","D"], bassNote: "G", duration: 4 },
+        { name: "Am/G",    notes: ["A","C","E"], bassNote: "G", duration: 4 },
+        { name: "Dm/G",    notes: ["D","F","A"], bassNote: "G", duration: 4 },
+        { name: "G13",     notes: ["G","B","D","F","A"], duration: 4 }
+      ]
+    },
+    {
+      name: "Pédale en Eb (worship sophistiqué)",
+      bpm: 70,
+      chords: [
+        { name: "Ebmaj9",  notes: ["Eb","G","Bb","D","F"], duration: 4 },
+        { name: "Ab/Eb",   notes: ["Ab","C","Eb"], bassNote: "Eb", duration: 4 },
+        { name: "Bb/Eb",   notes: ["Bb","D","F"], bassNote: "Eb", duration: 4 },
+        { name: "Cm/Eb",   notes: ["C","Eb","G"], bassNote: "Eb", duration: 4 }
+      ]
+    }
+  ],
+
+  "9.8": [
+    {
+      name: "Transitions douces en C (slash ponts)",
+      bpm: 75,
+      chords: [
+        { name: "Cmaj9",   notes: ["C","E","G","B","D"], duration: 4 },
+        { name: "C/E",     notes: ["C","E","G"], bassNote: "E", duration: 4 },
+        { name: "Fmaj9",   notes: ["F","A","C","E","G"], duration: 4 },
+        { name: "F/G",     notes: ["F","A","C"], bassNote: "G", duration: 4 },
+        { name: "G13",     notes: ["G","B","D","F","A"], duration: 4 },
+        { name: "Cmaj9",   notes: ["C","E","G","B","D"], duration: 4 }
+      ]
+    },
+    {
+      name: "Total Praise inspiration en Eb",
+      bpm: 60,
+      chords: [
+        { name: "Eb",       notes: ["Eb","G","Bb"], duration: 4 },
+        { name: "Bb/D",     notes: ["Bb","D","F"], bassNote: "D", duration: 4 },
+        { name: "Cm",       notes: ["C","Eb","G"], duration: 4 },
+        { name: "Cm/Bb",    notes: ["C","Eb","G"], bassNote: "Bb", duration: 4 },
+        { name: "Abmaj7",   notes: ["Ab","C","Eb","G"], duration: 4 },
+        { name: "Eb/G",     notes: ["Eb","G","Bb"], bassNote: "G", duration: 4 },
+        { name: "Fm7",      notes: ["F","Ab","C","Eb"], duration: 4 },
+        { name: "Bb7",      notes: ["Bb","D","F","Ab"], duration: 4 }
+      ]
+    }
+  ],
+
+  "9.9": [
+    {
+      name: "Voicing signature Eb (main D fixe, basse mobile)",
+      bpm: 70,
+      chords: [
+        { name: "Eb/G",   notes: ["Eb","G","Bb"], bassNote: "G", duration: 4 },
+        { name: "Eb/Bb",  notes: ["Eb","G","Bb"], bassNote: "Bb", duration: 4 },
+        { name: "Cm",     notes: ["C","Eb","G"], duration: 4 },
+        { name: "Eb",     notes: ["Eb","G","Bb"], duration: 4 },
+        { name: "Eb/F",   notes: ["Eb","G","Bb"], bassNote: "F", duration: 4 },
+        { name: "Eb/G",   notes: ["Eb","G","Bb"], bassNote: "G", duration: 4 }
+      ]
+    },
+    {
+      name: "Voicing signature en Bb",
+      bpm: 75,
+      chords: [
+        { name: "Bb/F",   notes: ["Bb","D","F"], bassNote: "F", duration: 4 },
+        { name: "Bb/Ab",  notes: ["Bb","D","F"], bassNote: "Ab", duration: 4 },
+        { name: "Bb",     notes: ["Bb","D","F"], duration: 4 },
+        { name: "Bb/D",   notes: ["Bb","D","F"], bassNote: "D", duration: 4 },
+        { name: "Eb",     notes: ["Eb","G","Bb"], duration: 4 },
+        { name: "Bb/F",   notes: ["Bb","D","F"], bassNote: "F", duration: 4 }
+      ]
+    }
   ]
 };
 

@@ -207,6 +207,84 @@ const LESSON_DIAGRAMS = {
   ],
   "7.6": [
     { name: "Enclosure F → D# → E sur Cmaj9", highlight: ["F","D#","E"] }
+  ],
+
+  // === MODULE 9: Slash Chords & Transitions ===
+  "9.1": [
+    { name: "F/C — F major avec C en basse", highlight: ["F","A","C"], bassNote: "C" },
+    { name: "Am/G — Am avec G en basse (slash composé)", highlight: ["A","C","E"], bassNote: "G" },
+    { name: "Bb/D — Bb avec D en basse (1ère inversion)", highlight: ["Bb","D","F"], bassNote: "D" }
+  ],
+
+  "9.2": [
+    { name: "C/E — 1ère inversion", highlight: ["C","E","G"], bassNote: "E" },
+    { name: "C/G — 2e inversion", highlight: ["C","E","G"], bassNote: "G" },
+    { name: "F/A — 1ère inversion", highlight: ["F","A","C"], bassNote: "A" },
+    { name: "F/C — 2e inversion", highlight: ["F","A","C"], bassNote: "C" },
+    { name: "G/B — LE slash le plus utilisé", highlight: ["G","B","D"], bassNote: "B" },
+    { name: "G/D — 2e inversion", highlight: ["G","B","D"], bassNote: "D" },
+    { name: "Am/C — relative mineure inversée", highlight: ["A","C","E"], bassNote: "C" },
+    { name: "Am/E — 2e inversion mineure", highlight: ["A","C","E"], bassNote: "E" },
+    { name: "F/G — F sur G basse (G11 implicite)", highlight: ["F","A","C"], bassNote: "G" },
+    { name: "Am/G — Am sur G basse (G7sus implicite)", highlight: ["A","C","E"], bassNote: "G" }
+  ],
+
+  "9.3": [
+    { name: "F/A — en F majeur", highlight: ["F","A","C"], bassNote: "A" },
+    { name: "F/C — en F majeur", highlight: ["F","A","C"], bassNote: "C" },
+    { name: "Bb/D — en F (IV inversé)", highlight: ["Bb","D","F"], bassNote: "D" },
+    { name: "C/E — en F (V inversé)", highlight: ["C","E","G"], bassNote: "E" },
+    { name: "Bb/D — en Bb (I 1ère inv)", highlight: ["Bb","D","F"], bassNote: "D" },
+    { name: "Bb/F — en Bb (I 2e inv)", highlight: ["Bb","D","F"], bassNote: "F" },
+    { name: "Eb/G — LE slash signature gospel (en Bb)", highlight: ["Eb","G","Bb"], bassNote: "G" },
+    { name: "Eb/Bb — pédale en Bb", highlight: ["Eb","G","Bb"], bassNote: "Bb" },
+    { name: "Cm/F — F11 implicite (V en Bb)", highlight: ["C","Eb","G"], bassNote: "F" }
+  ],
+
+  "9.4": [
+    { name: "Eb/G — 1ère inv en Eb", highlight: ["Eb","G","Bb"], bassNote: "G" },
+    { name: "Eb/Bb — 2e inv en Eb", highlight: ["Eb","G","Bb"], bassNote: "Bb" },
+    { name: "Ab/C — IV inversé en Eb", highlight: ["Ab","C","Eb"], bassNote: "C" },
+    { name: "Bb/D — V inversé en Eb", highlight: ["Bb","D","F"], bassNote: "D" },
+    { name: "Fm/Bb — Bb11 implicite (V en Eb)", highlight: ["F","Ab","C"], bassNote: "Bb" },
+    { name: "Ab/C — I 1ère inv en Ab", highlight: ["Ab","C","Eb"], bassNote: "C" },
+    { name: "Db/F — IV inversé en Ab", highlight: ["Db","F","Ab"], bassNote: "F" },
+    { name: "Eb/G — V inversé en Ab", highlight: ["Eb","G","Bb"], bassNote: "G" },
+    { name: "Bbm/Eb — Eb11 implicite (V en Ab)", highlight: ["Bb","Db","F"], bassNote: "Eb" }
+  ],
+
+  "9.5": [
+    { name: "Cmaj9/B (basse descend)", highlight: ["C","E","G","B","D"], bassNote: "B" },
+    { name: "Am9/G (basse continue à descendre)", highlight: ["A","C","E","G","B"], bassNote: "G" },
+    { name: "Fmaj9/E (basse descend encore)", highlight: ["F","A","C","E","G"], bassNote: "E" },
+    { name: "Dm9 (résolution avec D à la basse)", highlight: ["D","F","A","C","E"] }
+  ],
+
+  "9.6": [
+    { name: "Eb/F (intro qui monte)", highlight: ["Eb","G","Bb"], bassNote: "F" },
+    { name: "Eb/G (continue à monter)", highlight: ["Eb","G","Bb"], bassNote: "G" },
+    { name: "Eb/Bb (5e à la basse, ample)", highlight: ["Eb","G","Bb"], bassNote: "Bb" }
+  ],
+
+  "9.7": [
+    { name: "Cmaj9 — pédale de C (tonique)", highlight: ["C","E","G","B","D"] },
+    { name: "F/C — F major sur C (pédale)", highlight: ["F","A","C"], bassNote: "C" },
+    { name: "G/C — G major sur C (pédale, tension)", highlight: ["G","B","D"], bassNote: "C" }
+  ],
+
+  "9.8": [
+    { name: "C/E (pont entre C et F)", highlight: ["C","E","G"], bassNote: "E" },
+    { name: "F/E (pédale sur E avant F)", highlight: ["F","A","C"], bassNote: "E" },
+    { name: "Cmaj9/B (pont entre Cmaj9 et Am9)", highlight: ["C","E","G","B","D"], bassNote: "B" },
+    { name: "F/G (pont chromatique vers G13)", highlight: ["F","A","C"], bassNote: "G" }
+  ],
+
+  "9.9": [
+    { name: "Eb/G — voicing signature mesure 1", highlight: ["Eb","G","Bb"], bassNote: "G" },
+    { name: "Eb/Bb — mesure 2", highlight: ["Eb","G","Bb"], bassNote: "Bb" },
+    { name: "Cm — mesure 3 (Eb-G change brièvement)", highlight: ["C","Eb","G"] },
+    { name: "Eb — mesure 4 fondamentale", highlight: ["Eb","G","Bb"] },
+    { name: "Eb/F — mesure 5 (suspension qui monte)", highlight: ["Eb","G","Bb"], bassNote: "F" }
   ]
 };
 

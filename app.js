@@ -937,7 +937,7 @@ function showCelebration(lessonId) {
   if (allDone) {
     icon = '◆';
     title = 'Bible complétée';
-    text = 'Tu as parcouru les 57 leçons. Maintenant, l\'instrument t\'appartient.';
+    text = 'Tu as parcouru les 66 leçons. Maintenant, l\'instrument t\'appartient.';
   } else if (moduleCompleted) {
     icon = '✦';
     title = `Module ${module.id} validé`;

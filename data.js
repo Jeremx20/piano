@@ -1375,8 +1375,369 @@ Les modes gospel-friendly:
           keyTakeaway: "Bon pianiste = pianiste qui écoute le contexte. Pas le même jeu seul ou en groupe."
         }
       ]
+    },
+
+    // ==========================================================
+    // MODULE 9 — SLASH CHORDS & TRANSITIONS PRO
+    // ==========================================================
+    {
+      id: 9,
+      title: "Slash Chords & Transitions",
+      subtitle: "L'arsenal secret du pianiste gospel — basses mobiles et inversions",
+      icon: "🔀",
+      color: "#7c2d12",
+      description: "Le slash chord (key over key) c'est ce qui sépare le pianiste qui 'joue les accords' du pianiste qui 'sonne gospel'. Ce module est une bibliothèque pratique: tu apprends, tu pratiques, tu intègres.",
+      lessons: [
+        {
+          id: "9.1",
+          title: "Slash chord — refresher complet",
+          duration: "20 min",
+          objective: "Bétonner la notation et l'usage des slash chords.",
+          theory: `Un **slash chord** s'écrit toujours: **ACCORD / NOTE-DE-BASSE**.
+
+Exemples concrets:
+- **C/E** = accord de C majeur (C-E-G), avec **E** comme note de basse (main gauche)
+- **F/A** = accord de F (F-A-C), avec **A** à la basse
+- **Eb/G** = accord d'Eb (Eb-G-Bb), avec **G** à la basse
+- **Bbmaj7/D** = accord de Bbmaj7 (Bb-D-F-A), avec **D** à la basse
+
+**3 utilités principales en gospel:**
+
+1. **Créer une ligne de basse mobile** sous des accords stables (signature gospel)
+2. **Adoucir les transitions** entre 2 accords distants (au lieu d'un saut, une descente)
+3. **Faire entendre un accord composé** (slash chord ≠ inversion, parfois la basse n'appartient PAS à l'accord)
+
+🎯 **Règle absolue:** la note après le slash va **toujours** à la main gauche.
+
+**Slash chord vs inversion:**
+- **Inversion:** la basse fait partie de l'accord (C/E = C major en 1ère inversion)
+- **Slash composé:** la basse ne fait PAS partie de l'accord (D/F# est un slash composé courant en pop/gospel = bD majeur sur F# basse → crée un accord D6/9 implicite)
+
+En pratique, en gospel, **on utilise les deux** sans se prendre la tête sur la distinction théorique.`,
+          exercise: `Décris ce que tu joues sur ces slash chords:
+- F/C : main G = ?, main D = ?
+- Am/G : main G = ?, main D = ?
+- Bb/D : main G = ?, main D = ?
+
+Réponses:
+- F/C : G = C, D = F-A-C
+- Am/G : G = G, D = A-C-E (= G9 sans le 3!)
+- Bb/D : G = D, D = Bb-D-F`,
+          keyTakeaway: "Slash = note après le / va à la main gauche. Reste de l'accord à la main droite."
+        },
+        {
+          id: "9.2",
+          title: "Catalogue — slash chords en C majeur",
+          duration: "25 min",
+          objective: "Mémoriser tous les slash chords utiles en C majeur.",
+          theory: `Voici la **bibliothèque pratique** des slash chords les plus utilisés en C majeur. Apprends-les par cœur, ils reviennent partout dans le répertoire gospel.
+
+**Inversions du I (Cmaj):**
+- **C/E** — 1ère inversion, créé une basse plus haute, doux
+- **C/G** — 2e inversion, sonne "ouvert", très Hillsong
+
+**Inversions du IV (F):**
+- **F/A** — 1ère inversion, transition fluide vers G
+- **F/C** — 2e inversion, "ample"
+
+**Inversions du V (G):**
+- **G/B** — 1ère inversion, **LE slash le plus utilisé**, basse descend de C
+- **G/D** — 2e inversion, sonne planant
+
+**Inversions du vi (Am):**
+- **Am/C** — 1ère inversion, fait sonner un C6 implicite
+- **Am/E** — 2e inversion
+
+**Slash chord composé (basse étrangère):**
+- **F/G** — F major sur G basse (= G11 implicite, très utilisé sur le V)
+- **C/D** — C major sur D basse (= D9sus implicite)
+- **Am/G** — Am sur G basse (= G7sus implicite)
+
+🎯 **Astuce:** ces slash chords te permettent de créer des **basses mobiles** dans toute la tonalité de C sans jamais quitter les notes blanches.`,
+          exercise: `Joue cette ligne de basse descendante en C: **C → C/B → Am → Am/G → F → F/E → Dm → G/D**.
+
+Note: la basse descend chromatiquement de C à D, c'est ça la magie des slash chords.`,
+          keyTakeaway: "En C, 10+ slash chords à connaître. Ils créent des basses mobiles sur les touches blanches."
+        },
+        {
+          id: "9.3",
+          title: "Catalogue — slash chords en F et Bb",
+          duration: "25 min",
+          objective: "Maîtriser les slash chords dans les tonalités gospel principales.",
+          theory: `**En F majeur:**
+
+Inversions du I (F):
+- **F/A** (1ère inv) — très utilisé
+- **F/C** (2e inv) — ouvert
+
+Inversions du IV (Bb):
+- **Bb/D** — basse intermédiaire entre F et G/F
+- **Bb/F** — pédale sur F
+
+Inversions du V (C):
+- **C/E** — fluide avant F
+- **C/G** — planant
+
+Slash composés:
+- **Bb/C** — sur le V, crée un C9sus
+- **F/G** — création de tension
+
+**En Bb majeur:**
+
+Inversions du I (Bb):
+- **Bb/D** — basse haute, très soul
+- **Bb/F** — 5e en basse, ample
+
+Inversions du IV (Eb):
+- **Eb/G** — **LE slash signature gospel** (cf. Peter Martin)
+- **Eb/Bb** — pédale
+
+Inversions du V (F):
+- **F/A** — fluide
+- **F/C** — planant
+
+Slash composés:
+- **Eb/F** — sur le V, crée un F9sus
+- **Cm/F** — sur le V, crée un F11
+
+🎯 **Pour Jeremie:** vu que tu utilises souvent Eb (cf. ton screenshot du début), maîtriser **Eb/G, Eb/Bb, Bb/D, Cm/F** te permet de jouer 80% des morceaux gospel en Eb sans efforts.`,
+          exercise: `En Bb majeur, joue cette progression avec basse descendante:
+**Bb → Bb/A → Gm → Gm/F → Eb → Eb/D → Cm → F/C**
+
+Réponse: basse descend Bb→A→G→F→E→D→C, accords stables au-dessus.`,
+          keyTakeaway: "F et Bb sont les tonalités gospel reines. Maîtrise leurs slash chords en priorité."
+        },
+        {
+          id: "9.4",
+          title: "Catalogue — slash chords en Eb et Ab",
+          duration: "25 min",
+          objective: "Maîtriser les slash chords des tonalités à plusieurs bémols.",
+          theory: `**En Eb majeur (tonalité Peter Martin):**
+
+Inversions du I (Eb):
+- **Eb/G** — la 1ère inversion gospel par excellence
+- **Eb/Bb** — 5e à la basse
+
+Inversions du IV (Ab):
+- **Ab/C** — fluide
+- **Ab/Eb** — ample
+
+Inversions du V (Bb):
+- **Bb/D** — la résolution typique
+- **Bb/F** — planant
+
+Slash composés:
+- **Ab/Bb** — sur le V, crée Bb9sus
+- **Fm/Bb** — sur le V, crée Bb11
+- **Cm/Eb** — relatif mineur en inversion
+
+**En Ab majeur (tonalité worship):**
+
+Inversions du I (Ab):
+- **Ab/C** — soul
+- **Ab/Eb** — ouvert
+
+Inversions du IV (Db):
+- **Db/F** — chaleureux
+- **Db/Ab** — pédale
+
+Inversions du V (Eb):
+- **Eb/G** — fluide
+- **Eb/Bb** — planant
+
+Slash composés:
+- **Db/Eb** — sur le V, crée Eb9sus
+- **Bbm/Eb** — sur le V, crée Eb11
+
+🎯 **Ces tonalités sont la signature gospel/soul/R&B.** Stevie Wonder, Kirk Franklin, Smokie Norful jouent presque toujours dans ces tons.`,
+          exercise: `En Eb majeur, pratique ce passage signature gospel:
+**Eb/G → Eb/Bb → Cm → Ab/C → Bb/D → Eb**
+
+C'est le mouvement type des intros gospel.`,
+          keyTakeaway: "Eb et Ab = les tonalités gospel/soul. Slash chords ici = son pro instantané."
+        },
+        {
+          id: "9.5",
+          title: "Lignes de basse descendantes",
+          duration: "30 min",
+          objective: "Construire des basses qui descendent chromatiquement sous des accords.",
+          theory: `**La technique signature gospel/pop:** garder la main droite **assez stable** pendant que la main gauche fait **descendre** la basse étape par étape.
+
+**Pattern classique en C majeur:**
+
+| Mesure | Main G (basse) | Main D (accord) | Notation |
+|--------|----------------|------------------|----------|
+| 1      | C              | Cmaj9            | Cmaj9    |
+| 2      | B              | Cmaj9 (idem)     | Cmaj9/B  |
+| 3      | A              | Am9              | Am9      |
+| 4      | G              | Am9 (idem)       | Am9/G    |
+| 5      | F              | Fmaj9            | Fmaj9    |
+| 6      | E              | Fmaj9 (idem)     | Fmaj9/E  |
+| 7      | D              | Dm9              | Dm9      |
+| 8      | G              | G13              | G13      |
+
+🎯 **L'effet:** la basse fait **C → B → A → G → F → E → D → G** = une descente chromatique/diatonique presque continue. C'est le mouvement de basse qui te fait dire "wow ça sonne pro".
+
+**Variante avec passing chromatique:**
+Insère **C → B → Bb → A** au lieu de C → B → A → G. Le Bb passing rend la descente encore plus soul.
+
+**Variante gospel "Hillsong":**
+En G majeur: **G → D/F# → Em → Em/D → C → G/B → Am → D**
+(basse descend G → F# → E → D → C → B → A → D)`,
+          exercise: `Joue le pattern de 8 mesures ci-dessus en C, lentement (60 BPM). Note l'effet de descente sur l'oreille.
+
+Puis transpose en Bb: Bb → Bb/A → Gm → Gm/F → Eb → Eb/D → Cm → F.`,
+          keyTakeaway: "Basse descendante = LE truc gospel/worship. La main droite reste, la gauche raconte l'histoire."
+        },
+        {
+          id: "9.6",
+          title: "Lignes de basse ascendantes",
+          duration: "25 min",
+          objective: "Construire des montées de basse pour les intros et les builds.",
+          theory: `**Le pendant inverse de la descente:** quand tu veux **monter en énergie**, la basse monte sous des accords parfois stables, parfois qui suivent.
+
+**Pattern intro gospel classique en Eb:**
+
+| Mesure | Main G (basse) | Main D (accord) | Notation |
+|--------|----------------|------------------|----------|
+| 1      | Eb             | Eb               | Eb       |
+| 2      | F              | Eb (idem)        | Eb/F     |
+| 3      | G              | Eb (idem)        | Eb/G     |
+| 4      | Ab             | Ab               | Ab       |
+| 5      | Bb             | Eb               | Eb/Bb    |
+| 6      | C              | Cm               | Cm       |
+| 7      | D              | Bb               | Bb/D     |
+| 8      | Eb             | Eb               | Eb       |
+
+🎯 **C'est exactement le pattern du screenshot Peter Martin** du début du cours! La main droite tient une triade fixe (Eb ou voisine), la main gauche **monte** progressivement.
+
+**Variante worship en C:**
+**C → C/D → C/E → F → C/G → Am → C/B → C** (basse monte C → D → E → F → G → A → B → C)
+
+**Astuce gospel:** la **basse monte = on prépare le climax**. Très utilisé en intro de morceaux puissants ou avant un pont.`,
+          exercise: `Joue l'intro Eb (8 mesures), main droite fixe sur Eb-G-Bb, main gauche qui monte: Eb→F→G→Ab→Bb→C→D→Eb.
+
+Ça doit sonner exactement comme l'intro d'un morceau gospel classique.`,
+          keyTakeaway: "Basse ascendante = build d'intensité. Main droite stable, main gauche grimpe."
+        },
+        {
+          id: "9.7",
+          title: "Pédale de basse (drone)",
+          duration: "25 min",
+          objective: "Tenir une note de basse fixe pendant que les accords changent au-dessus.",
+          theory: `**Pédale de basse** = la main gauche tient **une seule note** (souvent la tonique ou la dominante) pendant que la main droite joue plusieurs accords.
+
+**Pédale de tonique en C:**
+
+| Mesure | Main G (basse) | Main D (accord) | Notation |
+|--------|----------------|------------------|----------|
+| 1      | C              | Cmaj9            | Cmaj9    |
+| 2      | C              | F/C              | F/C      |
+| 3      | C              | G/C              | G/C      |
+| 4      | C              | Cmaj9            | Cmaj9    |
+
+🎯 **L'effet:** la basse "ancre" le morceau pendant que l'harmonie respire. Crée une **stabilité méditative** très Kirk Franklin / Hillsong / praise & worship.
+
+**Pédale de dominante en C:**
+- Main G: **G** tenue
+- Main D: alterne Cmaj9/G → Am/G → Dm/G → G13
+
+L'effet est **tension qui ne se résout pas** — parfait pour un build avant un climax.
+
+**Pédale rythmique:**
+Joue la note de basse **en octaves** ou **en croches répétées** au lieu d'une note tenue. Donne du groove (cf. "Take Me To The King").
+
+🎯 **Pourquoi c'est puissant:** en faisant ça, tu **simules une basse + batterie** en jouant seul. L'oreille pense qu'il y a un bassiste.`,
+          exercise: `Tiens la note **C** à la main gauche pendant 4 mesures, et joue cette séquence main droite: Cmaj9 → Fmaj9 → Gsus → Cmaj9.
+
+Tu obtiens: Cmaj9 → Fmaj9/C → Gsus/C → Cmaj9.`,
+          keyTakeaway: "Pédale = basse fixe, accords mobiles. Crée stabilité ou tension selon la note choisie."
+        },
+        {
+          id: "9.8",
+          title: "Transitions via slash chords",
+          duration: "30 min",
+          objective: "Passer d'un accord à un autre en douceur grâce à un slash intermédiaire.",
+          theory: `**Le problème:** sauter directement d'un accord à un autre éloigné sonne "haché". 
+
+**La solution gospel:** insérer un **slash chord** intermédiaire qui crée un **mouvement de basse fluide**.
+
+**Exemple 1 — De C à F (saut de quarte):**
+- Brutal: C → F
+- Fluide: **C → C/E → F** (basse C → E → F, ça glisse)
+- Encore plus fluide: **C → C/E → F/E → F** (basse C → E → E → F, basse tenue puis mouvement)
+
+**Exemple 2 — De Cmaj9 à Am9 (descente):**
+- Brutal: Cmaj9 → Am9 (gros saut)
+- Fluide: **Cmaj9 → Cmaj9/B → Am9** (basse C → B → A descend chromatiquement)
+
+**Exemple 3 — Transition gospel "Total Praise":**
+- **Eb → Bb/D → Cm → Cm/Bb → Abmaj7 → Eb/G**
+- Basse: Eb → D → C → Bb → Ab → G (descente parfaite)
+
+**Exemple 4 — Pour aller vers le V:**
+- Au lieu de "Fmaj9 → G13" brutal
+- Joue **Fmaj9 → Fmaj9/A → G13** (basse F → A → G, monte puis descend)
+- Ou **Fmaj9 → F/G → G13** (basse F → G → G, monte directement)
+
+🎯 **Principe général:** entre 2 accords, la **basse doit bouger de manière mélodique** (par tons ou demi-tons, pas par sauts énormes). Les slash chords te donnent les outils.`,
+          exercise: `Réécris ces progressions brutales en ajoutant un slash chord intermédiaire:
+1. C → Am → F → G → C
+2. Eb → Ab → Cm → Bb → Eb
+
+Réponses possibles:
+1. C → C/B → Am → Am/G → F → F/E → Dm/F → G → C
+2. Eb → Eb/D → Cm → Cm/Bb → Ab → Ab/G → Fm → Bb → Eb`,
+          keyTakeaway: "Slash chord intermédiaire = pont fluide entre 2 accords. Cherche toujours le mouvement de basse mélodique."
+        },
+        {
+          id: "9.9",
+          title: "Le voicing 'gospel signature' complet",
+          duration: "30 min",
+          objective: "Synthétiser tout: triade fixe main droite + slash mobile main gauche.",
+          theory: `**Le voicing absolu du gospel.** Combine tout ce que tu as appris dans ce module.
+
+**Formule:**
+- Main droite: une **triade simple** (3 notes seulement, peu de mouvement)
+- Main gauche: **basse mobile** qui crée des slash chords successifs
+
+**Pratique sur 8 mesures en Eb (style Peter Martin):**
+
+| Mesure | Main G | Main D fixe | Notation |
+|--------|--------|-------------|----------|
+| 1      | G      | Eb-G-Bb     | Eb/G     |
+| 2      | Bb     | Eb-G-Bb     | Eb/Bb    |
+| 3      | C      | Eb-G-Bb     | Cm7      |
+| 4      | Eb     | Eb-G-Bb     | Eb       |
+| 5      | F      | Eb-G-Bb     | Eb/F     |
+| 6      | G      | Eb-G-Bb     | Eb/G     |
+| 7      | Ab     | Eb-G-Bb     | (suspension) |
+| 8      | Bb     | Eb-G-Bb     | Eb/Bb    |
+
+🎯 **L'astuce:** la main droite **ne bouge pas**. Tu peux te concentrer 100% sur la basse + le groove. Et pourtant, ça sonne ultra riche grâce aux slash chords successifs.
+
+**Variante en Bb (même principe):**
+- Main D fixe: Bb-D-F
+- Main G: F → Ab → Bb → D → Eb → F → G
+
+**Variante en C (touches blanches):**
+- Main D fixe: C-E-G
+- Main G: G → A → B → C → D → E → F → G
+
+🎯 **Pourquoi c'est génial pour débuter:**
+- Tu n'as besoin de mémoriser qu'**une seule position** à la main droite
+- Tu peux **bouger librement** à la main gauche pour créer la mélodie de basse
+- Ça sonne **immédiatement gospel**, sans effort harmonique
+
+C'est exactement ce qu'on voit dans le screenshot Peter Martin que tu m'as montré au début. Maintenant tu as toutes les briques pour le reproduire et l'étendre.`,
+          exercise: `Joue le pattern Eb sur 8 mesures (boucle), main droite fixe Eb-G-Bb, main gauche qui suit le tableau. Vise 60 BPM puis 80 puis 100.
+
+Quand tu maîtrises ça, tu sonnes **immédiatement** comme un pianiste gospel.`,
+          keyTakeaway: "Voicing gospel signature = triade fixe MD + basse mobile MG. Le secret le mieux gardé."
+        }
+      ]
     }
   ]
 };
 
-// Total leçons: 7 + 8 + 7 + 7 + 7 + 7 + 7 + 7 = 57 leçons
+// Total leçons: 7 + 8 + 7 + 7 + 7 + 7 + 7 + 7 + 9 = 66 leçons
