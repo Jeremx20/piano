@@ -6,7 +6,7 @@
 const COURSE_DATA = {
   title: "Gospel Piano Bible",
   subtitle: "Le parcours complet — du débutant au pianiste gospel accompli",
-  author: "Coach Claude × Jeremie",
+  author: "Gospel Piano Bible",
 
   modules: [
     // ==========================================================
@@ -119,7 +119,7 @@ Réponse: I=FA, II=SOL, V=DO.`,
 **Triade diminuée (1-b3-b5):** sonorité tendue, instable.
 - DO dim = C-Eb-Gb (3 demi-tons + 3 demi-tons)
 
-🎯 **Astuce de fou:** Majeur = "3 puis 4" (en demi-tons). Mineur = "4 puis 3". Tu peux construire n'importe quel accord sans gamme.`,
+🎯 **Le truc qui change tout:** Majeur = "3 puis 4" (en demi-tons). Mineur = "4 puis 3". Tu peux construire n'importe quel accord sans gamme.`,
           exercise: `Construis: Ré majeur, Mi mineur, Fa majeur, Sol mineur.
 
 Réponses: D-F#-A, E-G-B, F-A-C, G-Bb-D.`,
@@ -1500,7 +1500,7 @@ Slash composés:
 - **Eb/F** — sur le V, crée un F9sus
 - **Cm/F** — sur le V, crée un F11
 
-🎯 **Pour Jeremie:** vu que tu utilises souvent Eb (cf. ton screenshot du début), maîtriser **Eb/G, Eb/Bb, Bb/D, Cm/F** te permet de jouer 80% des morceaux gospel en Eb sans efforts.`,
+🎯 **Astuce pratique:** si tu joues souvent en Eb (la tonalité gospel par excellence, beaucoup de morceaux Smokie Norful, Richard Smallwood etc.), maîtriser **Eb/G, Eb/Bb, Bb/D, Cm/F** te permet de jouer 80% des morceaux gospel en Eb sans efforts.`,
           exercise: `En Bb majeur, joue cette progression avec basse descendante:
 **Bb → Bb/A → Gm → Gm/F → Eb → Eb/D → Cm → F/C**
 

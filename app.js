@@ -13,8 +13,72 @@ let state = {
 };
 
 // ============================================================
-// PIANO DIAGRAMS RENDERING
+// EXERCISE — split into question + hidden answer
 // ============================================================
+
+function renderExerciseWithHiddenAnswer(exerciseText, lessonId) {
+  if (!exerciseText) return '';
+
+  // Try to find the answer separator (multiple variants supported)
+  const separators = [
+    /\n\s*Réponses?\s*:/i,        // "Réponse:" or "Réponses:"
+    /\n\s*Réponses?\s*\?/i,
+    /\n\s*Solution\s*:/i
+  ];
+
+  let question = exerciseText;
+  let answer = null;
+
+  for (const sep of separators) {
+    const match = exerciseText.match(sep);
+    if (match) {
+      const idx = match.index;
+      question = exerciseText.substring(0, idx).trim();
+      // Get the rest, removing the "Réponse:" prefix
+      answer = exerciseText.substring(idx).replace(/^\s*\n?\s*Réponses?\s*:\s*/i, '').trim();
+      break;
+    }
+  }
+
+  // No answer found — just render the exercise as-is
+  if (!answer) {
+    return `<div class="exercise-text">${formatText(exerciseText)}</div>`;
+  }
+
+  const answerId = `answer-${lessonId.replace('.', '-')}`;
+  return `
+    <div class="exercise-text">${formatText(question)}</div>
+    <div class="exercise-answer-wrapper">
+      <button class="exercise-answer-btn"
+              onclick="toggleAnswer('${answerId}', this)">
+        <span class="answer-btn-icon">👁</span>
+        <span class="answer-btn-text">Voir la réponse</span>
+      </button>
+      <div class="exercise-answer hidden" id="${answerId}">
+        <div class="answer-label">RÉPONSE</div>
+        <div class="exercise-text">${formatText(answer)}</div>
+      </div>
+    </div>
+  `;
+}
+
+function toggleAnswer(answerId, btn) {
+  const answer = document.getElementById(answerId);
+  if (!answer) return;
+  if (answer.classList.contains('hidden')) {
+    answer.classList.remove('hidden');
+    btn.querySelector('.answer-btn-icon').textContent = '🔒';
+    btn.querySelector('.answer-btn-text').textContent = 'Masquer la réponse';
+    btn.classList.add('revealed');
+  } else {
+    answer.classList.add('hidden');
+    btn.querySelector('.answer-btn-icon').textContent = '👁';
+    btn.querySelector('.answer-btn-text').textContent = 'Voir la réponse';
+    btn.classList.remove('revealed');
+  }
+}
+
+
 
 function renderDiagramsSection(lessonId) {
   if (typeof LESSON_DIAGRAMS === 'undefined') return '';
@@ -94,7 +158,36 @@ function initPiano() {
   pianoLoading = true;
   showLoadingIndicator();
 
-  // Start the audio context (required for iOS)
+  // === iOS Silent Switch fix ===
+  // On iPhone, when the silent switch is ON, Web Audio defaults to "ambient" mode
+  // which mutes the audio. We force "playback" mode using two techniques:
+  //
+  // Method 1: Modern AudioSession API (Safari 17+)
+  try {
+    if (navigator.audioSession) {
+      navigator.audioSession.type = 'playback';
+    }
+  } catch (e) { /* old browser, fallback */ }
+
+  // Method 2: Silent HTML5 audio loop trick (works on all iOS versions)
+  // We create a silent audio element playing in loop. This forces iOS to treat
+  // the page as "media playback" rather than "ambient", which ignores silent switch.
+  if (!document.getElementById('silent-audio-loop')) {
+    const audio = document.createElement('audio');
+    audio.id = 'silent-audio-loop';
+    audio.loop = true;
+    audio.playsInline = true;
+    // 1-second silent MP3, base64 encoded
+    audio.src = 'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//MUZAAAAAGkAAAAAAAAA0gAAAAAVVVV';
+    audio.style.display = 'none';
+    document.body.appendChild(audio);
+    audio.play().catch(() => { /* might fail without user gesture, retry later */ });
+  } else {
+    // Already exists, just resume play (in case user gesture is now available)
+    document.getElementById('silent-audio-loop').play().catch(() => {});
+  }
+
+  // Start the Tone.js audio context (required for iOS)
   Tone.start();
 
   // Salamander Grand Piano samples from tonejs.github.io
@@ -858,7 +951,7 @@ function openLesson(lessonId) {
     <section class="lesson-section">
       <div class="lesson-section-title">Exercice</div>
       <div class="exercise-box">
-        <div class="exercise-text">${formatText(foundLesson.exercise)}</div>
+        ${renderExerciseWithHiddenAnswer(foundLesson.exercise, lessonId)}
       </div>
     </section>
 
