@@ -158,36 +158,7 @@ function initPiano() {
   pianoLoading = true;
   showLoadingIndicator();
 
-  // === iOS Silent Switch fix ===
-  // On iPhone, when the silent switch is ON, Web Audio defaults to "ambient" mode
-  // which mutes the audio. We force "playback" mode using two techniques:
-  //
-  // Method 1: Modern AudioSession API (Safari 17+)
-  try {
-    if (navigator.audioSession) {
-      navigator.audioSession.type = 'playback';
-    }
-  } catch (e) { /* old browser, fallback */ }
-
-  // Method 2: Silent HTML5 audio loop trick (works on all iOS versions)
-  // We create a silent audio element playing in loop. This forces iOS to treat
-  // the page as "media playback" rather than "ambient", which ignores silent switch.
-  if (!document.getElementById('silent-audio-loop')) {
-    const audio = document.createElement('audio');
-    audio.id = 'silent-audio-loop';
-    audio.loop = true;
-    audio.playsInline = true;
-    // 1-second silent MP3, base64 encoded
-    audio.src = 'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//MUZAAAAAGkAAAAAAAAA0gAAAAAVVVV';
-    audio.style.display = 'none';
-    document.body.appendChild(audio);
-    audio.play().catch(() => { /* might fail without user gesture, retry later */ });
-  } else {
-    // Already exists, just resume play (in case user gesture is now available)
-    document.getElementById('silent-audio-loop').play().catch(() => {});
-  }
-
-  // Start the Tone.js audio context (required for iOS)
+  // Start the audio context (required for iOS)
   Tone.start();
 
   // Salamander Grand Piano samples from tonejs.github.io
