@@ -304,6 +304,167 @@ function playChord(noteData) {
   });
 }
 
+// === Musical chord playback for progression player ===
+// Plays a chord with proper gospel/jazz voicing rules:
+// - Bass in deep register (C2-C3) like a bass player
+// - RH voicing in "sweet zone" C4-A4 (tessitura of a singing voice)
+// - All chord notes within 1 octave of each other (no wide gaps that sound disharmonious)
+// - Voice leading from previous chord (common notes stay, others move by step)
+// - Sustained bass + gentle rolling RH
+let lastChordVoicingSemis = null; // remembers previous chord's RH semitones for voice leading
+
+function playChordMusical(noteData, durationSeconds) {
+  const { highlight = [], bassNote = null } = noteData;
+
+  if (!pianoSampler || !pianoLoaded) return;
+
+  const noteDuration = durationSeconds * 1.05;
+  const bassDuration = durationSeconds * 1.1;
+
+  // === BASS in deep register ===
+  // If slash chord: use the slash bass note in octave 2 (deep, like upright bass)
+  // Otherwise: use the chord root in octave 2-3
+  const rootNote = highlight[0]; // the root is the first note in our convention
+  const actualBass = bassNote || rootNote;
+  if (actualBass) {
+    // Choose octave: prefer octave 2 unless it would be too low (notes Ab-B in octave 2 are fine)
+    playNoteVelocity(actualBass, 2, bassDuration, 0.55);
+  }
+
+  // === RIGHT HAND VOICING ===
+  // Build the chord notes in the "sweet zone" (C4-C5 = MIDI 60-72)
+  // Rule: all chord notes within 1 octave of each other for tight, balanced sound
+  const rhNotes = computeRHVoicing(highlight, bassNote);
+
+  // Gentle rolling arpeggiation
+  const rollDelay = 12; // ms between notes — natural rolling feel
+  rhNotes.forEach((noteInfo, i) => {
+    const velocity = 0.42 + (i / rhNotes.length) * 0.22;
+    setTimeout(() => playNoteVelocity(noteInfo.note, noteInfo.octave, noteDuration, velocity), i * rollDelay);
+  });
+
+  // Save voicing for next chord's voice leading
+  lastChordVoicingSemis = rhNotes.map(n => ({
+    semi: noteToSemitone(n.note),
+    octave: n.octave,
+    midi: (n.octave + 1) * 12 + noteToSemitone(n.note)
+  }));
+}
+
+// Compute optimal RH voicing using gospel/jazz rules:
+// - All notes within ~1 octave of each other
+// - Top note ideally between C4 (MIDI 60) and A4 (MIDI 69) — "sweet zone"
+// - Skip the root if the bass is playing it (rootless voicing)
+// - Voice lead from previous chord when possible
+function computeRHVoicing(chordNotes, bassNote) {
+  // Convert to semitones
+  const notes = chordNotes.slice();
+  const semis = notes.map(n => noteToSemitone(n));
+
+  // For rootless: if no explicit slash bass AND chord has more than 3 notes,
+  // drop the root from RH (it's in the bass). Otherwise keep it (triads need root).
+  let voicingNotes = notes;
+  let voicingSemis = semis;
+  if (!bassNote && notes.length >= 4) {
+    voicingNotes = notes.slice(1);
+    voicingSemis = semis.slice(1);
+  }
+
+  // Target zone: place notes between MIDI 60 (C4) and MIDI 72 (C5) for lowest note
+  const targetLow = 60; // C4
+
+  // === Voice leading: if we have a previous chord, try to position this one
+  // so its lowest note is close to the previous chord's lowest note ===
+  let bestOctave;
+  if (lastChordVoicingSemis && lastChordVoicingSemis.length > 0) {
+    // Find average MIDI of previous voicing
+    const prevAvg = lastChordVoicingSemis.reduce((s, n) => s + n.midi, 0) / lastChordVoicingSemis.length;
+    // Place this chord so its average is close to previous
+    const firstSemi = voicingSemis[0];
+    let bestDistance = Infinity;
+    bestOctave = 4;
+    for (let oct = 3; oct <= 5; oct++) {
+      const midi = (oct + 1) * 12 + firstSemi;
+      // Estimate where this chord would end (rough)
+      const estimatedAvg = midi + 6; // rough estimate
+      const dist = Math.abs(estimatedAvg - prevAvg);
+      // Also constraint: lowest note must be in [C4, C5] range
+      if (midi >= targetLow - 2 && midi <= targetLow + 12) {
+        if (dist < bestDistance) {
+          bestDistance = dist;
+          bestOctave = oct;
+        }
+      }
+    }
+    if (bestDistance === Infinity) bestOctave = 4;
+  } else {
+    // First chord: place first note in sweet zone, preferring near E4
+    const firstSemi = voicingSemis[0];
+    let bestDistance = Infinity;
+    bestOctave = 4;
+    for (let oct = 3; oct <= 5; oct++) {
+      const midi = (oct + 1) * 12 + firstSemi;
+      if (midi >= targetLow && midi <= targetLow + 12) {
+        const dist = Math.abs(midi - (targetLow + 4));
+        if (dist < bestDistance) {
+          bestDistance = dist;
+          bestOctave = oct;
+        }
+      }
+    }
+    if (bestDistance === Infinity) {
+      bestOctave = 4;
+    }
+  }
+
+  // Now place each note ascending from there
+  const result = [];
+  let prevMidi = -1;
+  for (let i = 0; i < voicingNotes.length; i++) {
+    const s = voicingSemis[i];
+    let oct = bestOctave;
+    let midi = (oct + 1) * 12 + s;
+    while (midi <= prevMidi) {
+      oct++;
+      midi = (oct + 1) * 12 + s;
+    }
+    result.push({ note: voicingNotes[i], octave: oct });
+    prevMidi = midi;
+  }
+
+  // Compress if spread > 1 octave + 4 semitones
+  const lowest = result[0];
+  const highest = result[result.length - 1];
+  const lowestMidi = (lowest.octave + 1) * 12 + noteToSemitone(lowest.note);
+  const highestMidi = (highest.octave + 1) * 12 + noteToSemitone(highest.note);
+  const spread = highestMidi - lowestMidi;
+
+  if (spread > 16 && result.length > 2) {
+    const newOct = result[result.length - 1].octave - 1;
+    const newMidi = (newOct + 1) * 12 + noteToSemitone(highest.note);
+    const secondHighest = result[result.length - 2];
+    const secondMidi = (secondHighest.octave + 1) * 12 + noteToSemitone(secondHighest.note);
+    if (newMidi > secondMidi) {
+      result[result.length - 1].octave = newOct;
+    }
+  }
+
+  return result;
+}
+
+
+// Play a note with explicit velocity (0.0 to 1.0)
+function playNoteVelocity(noteName, octave, duration, velocity) {
+  if (!pianoSampler) return;
+  const toneNote = noteToToneFormat(noteName, octave);
+  if (!toneNote) return;
+  try {
+    pianoSampler.triggerAttackRelease(toneNote, duration, undefined, velocity);
+  } catch (e) {
+    console.warn('playNoteVelocity error:', e);
+  }
+}
+
 // Determine the right octave for a chord note based on its position in the chord
 // Goal: notes should ascend naturally from the root
 function getChordOctave(note, allNotes, idx) {
@@ -602,14 +763,20 @@ function playNextChordInProgression() {
   );
   if (activeChip) activeChip.classList.add('active');
 
-  // Play the chord
-  playChord({ highlight: chord.notes, bassNote: chord.bassNote || null });
-
-  // Schedule next chord
-  // duration in beats; beat duration in ms = 60000 / bpm
+  // Compute the duration in seconds so the chord rings out for its full beat count
   const beatMs = 60000 / activeProgression.bpm;
   const chordDurationMs = chord.duration * beatMs;
+  const chordDurationSec = chordDurationMs / 1000;
 
+  // Play the chord musically (sustained, gentle roll, velocity built)
+  if (pianoLoaded) {
+    playChordMusical({ highlight: chord.notes, bassNote: chord.bassNote || null }, chordDurationSec);
+  } else {
+    // If samples not loaded yet, queue via the standard playChord
+    playChord({ highlight: chord.notes, bassNote: chord.bassNote || null });
+  }
+
+  // Schedule next chord
   activeProgression.intervalId = setTimeout(() => {
     activeProgression.index = (activeProgression.index + 1) % activeProgression.data.chords.length;
     playNextChordInProgression();
@@ -632,6 +799,7 @@ function stopActiveProgression() {
   activeProgression.index = 0;
   activeProgression.isPlaying = false;
   activeProgression.intervalId = null;
+  lastChordVoicingSemis = null; // reset voice leading
 }
 
 function adjustProgressionTempo(progId, delta) {
