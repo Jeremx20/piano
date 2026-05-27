@@ -412,87 +412,176 @@ Les doigts bougent peu. **C'est ça le secret du jeu fluide.**`,
           title: "Le voicing 'rootless'",
           duration: "20 min",
           objective: "Jouer sans la fondamentale à la main droite — le voicing des pros.",
-          theory: `**Rootless** = sans la fondamentale dans la main droite (elle est déjà à la main gauche, donc inutile de la doubler).
+          theory: `**Analogie:** imagine une équipe de foot. Le **gardien** (la basse, à la main gauche) tient déjà la fondamentale. Si tes 5 attaquants (main droite) jouent aussi gardien, ils sont mal placés. **Libère-les pour qu'ils marquent des buts** (= ajouter des couleurs intéressantes).
 
-**Cmaj9 rootless:**
+**Voilà l'idée:** quand ta main gauche joue déjà la fondamentale C, ta main droite n'a **pas besoin de la rejouer**. Elle peut faire autre chose de plus intéressant.
+
+**Exemple concret — Cmaj9:**
+
+❌ **Version débutant (avec fondamentale partout):**
 - Main G: **C**
-- Main D: **E - G - B - D** (pas de C!)
+- Main D: **C - E - G - B - D** (le C est doublé pour rien)
 
-**Avantage:** la main droite a 4 doigts pour les couleurs (3-5-7-9 ou 3-7-9-13).
+✅ **Version rootless (sans C dans la main droite):**
+- Main G: **C** (la basse fait le job)
+- Main D: **E - G - B - D** (4 notes au lieu de 5, toutes utiles)
 
-**Cmaj7 rootless minimaliste:**
+**Pourquoi c'est mieux:**
+1. **Plus aéré** — la main droite n'est pas surchargée
+2. **Plus de couleurs** — tes 4 doigts peuvent ajouter des notes intéressantes (9, 11, 13)
+3. **Mieux en groupe** — quand un bassiste joue déjà la fondamentale, tu doublerais pour rien
+
+**Encore plus minimaliste — le "shell voicing":**
+
+Sur Cmaj7, joue juste:
 - Main G: **C**
-- Main D: **E - B** (juste 3 et 7 = "shell")
+- Main D: **E - B** (juste 2 notes!)
 
-Ce voicing minimaliste s'appelle un **shell voicing**. Hyper utilisé en accompagnement pour ne pas surcharger le mix.`,
-          exercise: `Joue Dm9 rootless: main G = D, main D = F-A-C-E. Puis simplifie en shell: main G = D, main D = F-C.`,
-          keyTakeaway: "Rootless = main droite libérée de la fondamentale. Plus d'espace pour la couleur."
+Le **E** dit "c'est majeur", le **B** dit "c'est maj7". C'est tout ce qu'il faut. On appelle ça un **shell voicing** (voicing en coquille = juste l'essentiel).
+
+🎯 **Quand utiliser shell?** Quand tu accompagnes une voix qui chante. Tu laisses **toute la place** au chanteur, sans étouffer.`,
+          exercise: `**Étape 1:** Joue Dm9 rootless — main G = D, main D = F-A-C-E.
+**Étape 2:** Simplifie en shell — main G = D, main D = F-C (juste 2 notes!).
+**Étape 3:** Compare les 2 versions. La shell sonne plus "discrète" et libère plus de place.`,
+          keyTakeaway: "Rootless = main droite libérée de la fondamentale. Plus d'espace, plus de couleurs."
         },
         {
           id: "3.3",
           title: "Les guide tones (3 et 7)",
           duration: "20 min",
-          objective: "Identifier les 2 notes qui définissent un accord — les 'guide tones'.",
-          theory: `Les **guide tones** = les notes qui **définissent** l'accord:
-- La **3e** dit si c'est majeur ou mineur
-- La **7e** dit si c'est maj7, m7 ou 7 (dominant)
+          objective: "Identifier les 2 notes qui définissent un accord.",
+          theory: `**Analogie:** dans un accord, c'est comme dans un mot. Il y a des **lettres essentielles** (sans elles, le mot devient un autre) et des **lettres décoratives**.
 
-Toutes les autres notes (1, 5, 9, 11, 13) sont **décoratives**.
+Dans un accord, les 2 lettres essentielles sont:
+- **La 3e** → elle dit si l'accord est **majeur ou mineur**
+- **La 7e** → elle dit le **type d'accord** (maj7, m7, ou 7 dominant)
 
-🎯 **Conséquence:** un duo guide tones + basse suffit à faire entendre l'accord!
+Toutes les autres notes (1, 5, 9, 11, 13) sont **décoratives**. Belles à entendre, mais l'accord existe sans elles.
 
-**Cmaj7:** basse C + guide tones E (3) + B (7)
-**C7:** basse C + guide tones E (3) + Bb (b7)
-**Cm7:** basse C + guide tones Eb (b3) + Bb (b7)
+**Démonstration — comparons 3 accords avec C en basse:**
 
-**Utilité en gospel:** quand tu chantes par-dessus ou que tu accompagnes une voix, tu peux te contenter des guide tones pour ne pas étouffer.`,
-          exercise: `Joue ces shell voicings: Dm7 (D / F-C), G7 (G / B-F), Cmaj7 (C / E-B). Écoute la progression 2-5-1 en minimaliste.`,
-          keyTakeaway: "3 et 7 suffisent à dire l'accord. Tout le reste est bonus."
+| Accord  | 3e   | 7e   | Identité |
+|---------|------|------|----------|
+| Cmaj7   | E    | B    | Majeur, sonne lumineux |
+| Cm7     | E**b** | B**b** | Mineur, sonne sombre |
+| C7      | E    | B**b** | Dominante, sonne tendu |
+
+**Tu vois?** Change juste la 3e et la 7e, et l'accord change complètement de caractère. Les autres notes ne changent pas l'identité.
+
+🎯 **Conséquence pratique:** si tu joues **basse + guide tones**, l'auditeur entend l'accord même avec seulement 3 notes au total!
+
+**Application concrète:**
+- Tu accompagnes un chanteur, et tu veux pas surcharger
+- Joue juste: **basse à main G + 3e et 7e à main D**
+- Le chanteur respire, l'accord est là, tout le monde gagne`,
+          exercise: `**Joue ce 2-5-1 minimaliste en C** (juste basse + 3+7):
+- Dm7: main G = D, main D = **F - C**
+- G7: main G = G, main D = **B - F**
+- Cmaj7: main G = C, main D = **E - B**
+
+Écoute: la progression est claire malgré seulement 3 notes par accord. C'est ça la magie.`,
+          keyTakeaway: "3 et 7 = ADN de l'accord. Avec basse + ces 2 notes, l'accord est complet."
         },
         {
           id: "3.4",
           title: "Le voice leading",
           duration: "30 min",
-          objective: "Faire bouger les doigts au minimum entre les accords — la marque du pro.",
-          theory: `**Voice leading** = chaque note de la main droite se déplace vers la note **la plus proche** de l'accord suivant.
+          objective: "Faire bouger les doigts au minimum entre les accords.",
+          theory: `**Analogie:** imagine que tu changes de maison. Tu peux soit **tout déménager** (gros effort, prend du temps), soit **garder un max de meubles déjà en place** (rapide, fluide). Le voice leading, c'est la 2e option appliquée aux accords.
 
-**Exemple sans voice leading (mauvais):**
-- Dm9: D-F-A-C-E (5 notes)
-- G13: G-B-D-F-A
-- Cmaj9: C-E-G-B-D
-→ Sauts énormes entre les accords
+**Principe:** entre 2 accords, **garde un max de notes communes**, et fais bouger les autres **le moins possible** (par tons ou demi-tons).
 
-**Exemple AVEC voice leading (pro):**
-- Dm9 rootless: F-A-C-E (à main droite)
-- G13 rootless: F-A-B-E (seul le C → B bouge!)
-- Cmaj9 rootless: E-G-B-D (le F→E, A→G, E→D bougent d'un ton)
+---
 
-🎯 **Les doigts bougent à peine. C'est ÇA qui sonne pro.**
+**Démonstration avec un 2-5-1 en C (Dm9 → G13 → Cmaj9):**
 
-**Règle:** entre 2 accords, identifie les **notes communes** (elles restent) et les **notes qui changent** (elles vont à la plus proche).`,
-          exercise: `Joue le 2-5-1 en C avec voice leading: F-A-C-E → F-A-B-E → E-G-B-D. Sens le glissement.`,
-          keyTakeaway: "Voice leading = mouvement minimal = son fluide. Vise toujours le plus court chemin."
+❌ **Sans voice leading (sauts énormes):**
+- Dm9: D - F - A - C - E (toutes les notes du Dm9, ordonnées du grave)
+- G13: G - B - D - F - A (toutes du G13)
+- Cmaj9: C - E - G - B - D (toutes du Cmaj9)
+
+Entre chaque accord, **tu sautes partout**. Saccadé.
+
+✅ **Avec voice leading (notes communes gardées):**
+
+Étape 1 — joue Dm9 rootless en main droite: **F - A - C - E**
+
+Étape 2 — passe au G13. Quelles notes communes avec G13?
+- **F** (la 7e de G) → **on la garde**
+- **A** (la 9e de G) → **on la garde**
+- **E** (la 13e de G) → **on la garde**
+- **C** → n'est PAS dans G13, on doit bouger. La note la plus proche dans G13? **B** (un demi-ton plus bas). On bouge C → B.
+
+→ G13 devient: **F - A - B - E** (3 notes restent, 1 seule bouge!)
+
+Étape 3 — passe à Cmaj9. Notes communes avec Cmaj9?
+- **B** (la 7e de Cmaj9) → **on la garde**
+- Les autres (F, A, E) doivent bouger vers les notes les plus proches: F→E, A→G, E→D.
+
+→ Cmaj9 devient: **E - G - B - D** (toutes les notes bougent juste d'un ton/demi-ton)
+
+---
+
+🎯 **Résultat:** tes doigts bougent à peine entre les accords. C'est **ça** qui fait dire "wow, ça sonne pro".
+
+**La méthode en 2 étapes:**
+1. Pour chaque accord, identifie les **notes communes** avec l'accord suivant → elles restent
+2. Pour les notes qui doivent bouger → cherche la note la plus proche (1 ton ou 1 demi-ton) dans l'accord suivant`,
+          exercise: `Joue ce 2-5-1 en C **avec voice leading**:
+- Dm9: F - A - C - E
+- G13: F - A - B - E (seul le C → B bouge)
+- Cmaj9: E - G - B - D
+
+**Sens** le glissement, c'est lisse comme une caresse. Compare avec une version "j'attaque chaque accord à zéro".`,
+          keyTakeaway: "Voice leading = chaque note va à la note la plus proche. Plus le mouvement est petit, plus c'est pro."
         },
         {
           id: "3.5",
           title: "Le voicing en 4e",
           duration: "20 min",
           objective: "Empiler des quartes pour un son modal/contemporain.",
-          theory: `Au lieu d'empiler des **tierces** (1-3-5), on empile des **quartes** (1-4-7).
+          theory: `**Rappel:** un accord classique empile des **tierces** (intervalles de 3 notes). Ex: C major = C, puis E (3 notes plus loin), puis G (3 notes plus loin).
 
-**Quartal voicing sur C:**
-- C - F - Bb - Eb - Ab
+**L'idée du voicing en quartes:** au lieu d'empiler des **tierces**, on empile des **quartes** (intervalles de 4 notes).
 
-Sonorité: **ouverte, planante, contemporaine**. C'est le voicing des pianistes modernes (McCoy Tyner, Cory Henry).
+**Sonorité résultante:** **ouverte, planante, moderne**. C'est le voicing des pianistes contemporains comme McCoy Tyner (jazz modal) et Cory Henry (gospel moderne).
 
-**Application gospel moderne:**
-Sur un Cm7, joue: main G = C, main D = **G - C - F - Bb** (quartes empilées).
+---
 
-Ça donne un son très "Kirk Franklin moderne", très "Sunday Service".
+**Construction d'un voicing quartal sur Cm7:**
 
-🎯 **Truc:** ces voicings sonnent mieux sur **mineurs** et **sus** que sur majeurs purs.`,
-          exercise: `Joue Cm7 en voicing quartal (C / G-C-F-Bb) vs voicing tertiel (C / Eb-G-Bb-D). Compare.`,
-          keyTakeaway: "Quartes = son moderne, ouvert, planant. Idéal sur les m7 et sus."
+Au lieu de jouer C - Eb - G - Bb (empilage de tierces), tu empiles des quartes en partant d'une note de l'accord:
+
+- Pars du **G** (la 5e de Cm7)
+- Monte d'une quarte: **C**
+- Monte d'une quarte: **F**
+- Monte d'une quarte: **Bb**
+
+→ Voicing: **G - C - F - Bb**
+
+À jouer comme ceci:
+- Main G: **C** (basse)
+- Main D: **G - C - F - Bb** (les quartes)
+
+---
+
+**Pourquoi c'est différent?**
+
+Empilage de tierces = sonne "vertical", classique, défini.
+Empilage de quartes = sonne "horizontal", flottant, moderne. Comme si l'accord était suspendu, pas vraiment résolu.
+
+🎯 **Quand l'utiliser?**
+- Sur les **m7** et **sus** (sonne génial)
+- Sur les majeurs purs (sonne bizarre, à éviter)
+- En **intro** ou **break** pour créer une atmosphère
+- Pour évoquer un son **Kirk Franklin moderne / neo-soul / Cory Henry**`,
+          exercise: `Joue **Cm7 en deux versions** et compare:
+
+**Version classique** (tierces): main G = C, main D = Eb - G - Bb - D
+**Version quartale**: main G = C, main D = G - C - F - Bb
+
+Sens la différence de couleur. La quartale est plus "moderne" et "ouverte".`,
+          keyTakeaway: "Empilage de quartes au lieu de tierces = son moderne, planant. Idéal sur m7 et sus."
         },
         {
           id: "3.6",
@@ -665,22 +754,55 @@ En C: **F (IV) → Fm (iv) → C (I)**
           title: "Les dominantes secondaires",
           duration: "30 min",
           objective: "Ajouter des accords de tension entre les degrés diatoniques.",
-          theory: `**Dominante secondaire** = un accord 7 qui **résout** vers un degré autre que I.
+          theory: `**Analogie:** dans une histoire, tu peux aller du point A au point B **directement** (boring), ou faire un **détour intéressant** qui ajoute du suspense avant d'arriver. Les dominantes secondaires sont ces détours dans une progression d'accords.
 
-Notation: **V/x** ("5 de x").
+---
 
-**Exemple en C:** au lieu de Cmaj9 → Am9, joue **Cmaj9 → E7 → Am9**.
-- E7 = V de Am (sa dominante)
-- Crée une tension forte qui "tire" vers Am
+**Rappel rapide:** dans une tonalité, le V7 "tire" vers le I. En C, **G7 tire vers C**. C'est la dominante "principale".
 
-**Applications gospel courantes:**
-- **V/ii** (= III7) → fait tendre vers ii (ex: Cmaj9 → A7 → Dm9)
-- **V/V** (= II7) → fait tendre vers V (ex: Cmaj9 → D7 → G7)
-- **V/vi** (= III7) → fait tendre vers vi (ex: Cmaj9 → E7 → Am9)
+**L'idée des dominantes secondaires:** chaque accord d'une tonalité a **sa propre dominante**. Et tu peux les utiliser comme "petits détours" pour rendre une progression plus intéressante.
 
-🎯 **Astuce gospel:** quasi tous les pianistes gospel ajoutent **V/ii** dans leurs progressions. Ex: C → A7 → Dm → G → C.`,
-          exercise: `Joue: Cmaj9 → A7b9 → Dm9 → G13 → Cmaj9. Note la tension supplémentaire du A7b9.`,
-          keyTakeaway: "Dominantes secondaires = épices entre les accords diatoniques. Crée du chemin."
+---
+
+**Comment trouver la dominante secondaire de n'importe quel accord:**
+
+Méthode simple: **descends d'une quinte juste** depuis la note cible (ou monte de 7 demi-tons).
+
+Exemples:
+- La dominante de **Am** = **E7** (E est une quinte au-dessus de A... ou plutôt 5 notes au-dessus dans la gamme de A: A-B-C-D-**E**)
+- La dominante de **Dm** = **A7** (A est 5 notes au-dessus de D)
+- La dominante de **G** = **D7** (D est 5 notes au-dessus de G)
+
+---
+
+**Exemple concret — comparons 2 versions:**
+
+**Sans dominante secondaire (banal):**
+- Cmaj9 → Am9 → Dm9 → G13 → Cmaj9
+- C'est un 1-6-2-5 classique
+
+**Avec dominantes secondaires (intéressant):**
+- Cmaj9 → **E7** → Am9 → **A7** → Dm9 → G13 → Cmaj9
+- E7 "tire" vers Am9 (tension qui résout)
+- A7 "tire" vers Dm9 (tension qui résout)
+
+🎯 **L'effet:** chaque dominante secondaire crée une mini-tension qui se résout sur l'accord suivant. C'est ce qui donne cette sensation gospel de "chemin riche, fleuri".
+
+---
+
+**Les 3 dominantes secondaires les plus utilisées en gospel:**
+
+| Notation | C'est quoi en C? | À placer avant... |
+|----------|------------------|-------------------|
+| V/ii     | **A7**           | Dm9               |
+| V/V      | **D7**           | G13               |
+| V/vi     | **E7**           | Am9               |
+
+🎯 **L'astuce de fou:** dans 80% des progressions gospel, tu peux ajouter **V/ii** (= A7 en C) juste avant le Dm. Essaye partout, ça marche presque toujours.`,
+          exercise: `**Étape 1:** Joue le 1-6-2-5 standard: Cmaj9 → Am9 → Dm9 → G13.
+**Étape 2:** Ajoute des dominantes secondaires: Cmaj9 → **E7** → Am9 → **A7b9** → Dm9 → G13.
+**Étape 3:** Compare. La version 2 a un sentiment de "voyage" plus riche.`,
+          keyTakeaway: "Dominante secondaire = V7 d'un accord autre que le I. Ajoute des détours qui enrichissent la progression."
         },
         {
           id: "4.7",
@@ -765,42 +887,88 @@ Décomposé:
           title: "Le 'tritone substitution'",
           duration: "30 min",
           objective: "Remplacer un V7 par son équivalent à un triton de distance.",
-          theory: `**Tritone substitution** = remplacer **V7** par **bII7**.
+          theory: `**Analogie:** imagine 2 acteurs qui peuvent jouer le même rôle. Le rôle = "résoudre vers C majeur". L'acteur officiel = **G7**. L'acteur de remplacement = **Db7**. Ils font le même boulot, mais avec un style différent.
 
-**Tonalité de C:**
-- V = G7 (G-B-D-F)
-- bII = Db7 (Db-F-Ab-Cb=B)
+**Pourquoi ces 2 accords peuvent se remplacer:**
 
-Surprise: G7 et Db7 partagent les **mêmes guide tones** (B et F)! On peut donc les **interchanger**.
+Regarde leurs 2 notes les plus importantes (les guide tones — 3 et 7):
+- **G7** = G - **B** - D - **F** → guide tones: B (3) et F (b7)
+- **Db7** = Db - **F** - Ab - **B** (= Cb) → guide tones: F (3) et B (b7)
 
-**Application gospel:**
-- Standard: Dm9 → G7 → Cmaj9
-- Tritone: Dm9 → **Db7** → Cmaj9
+**Surprise:** ils partagent les **mêmes 2 notes essentielles** (B et F)! Du coup, à l'oreille, l'accord "résout" pareil.
 
-🎯 La basse descend chromatiquement: D → Db → C. Effet ultra-jazzy/gospel sophistiqué.
+---
 
-**Variante mixte:** Dm9 → G7 → Db7 → Cmaj9 (double dominant, super tendu).`,
-          exercise: `Joue Dm9 → Db9 → Cmaj9 lentement. Écoute la basse chromatique descendante.`,
-          keyTakeaway: "Tritone sub = V7 remplacé par bII7. Crée une descente chromatique gospel."
+**Comparaison en C:**
+
+**Version standard (avec G7):**
+- Dm9 → G7 → Cmaj9
+- Basse: D → G → C (saute)
+
+**Version tritone sub (avec Db7):**
+- Dm9 → **Db7** → Cmaj9
+- Basse: D → **Db** → C (descend chromatiquement!)
+
+🎯 **L'effet:** la basse descend par demi-tons (D → Db → C), ce qui sonne **ultra-jazzy / gospel sophistiqué**. C'est l'astuce des pianistes jazz/gospel pour donner une couleur "Coltrane" à une progression banale.
+
+---
+
+**Comment trouver le tritone sub d'un V7?**
+
+Méthode simple: **descends d'un demi-ton** depuis la note cible du V7.
+- En C: la cible est C. Le tritone sub = un demi-ton au-dessus de C = **Db7**.
+- En F: la cible est F. Le tritone sub = un demi-ton au-dessus = **Gb7** (au lieu de C7).
+- En Eb: la cible est Eb. Le tritone sub = un demi-ton au-dessus = **E7** (au lieu de Bb7).
+
+**Pourquoi "tritone"?** Parce que G et Db sont à une distance de **3 tons** (= un triton) l'un de l'autre. D'où le nom.`,
+          exercise: `**Étape 1:** Joue le 2-5-1 standard en C: Dm9 → G7 → Cmaj9.
+**Étape 2:** Joue la version tritone: Dm9 → **Db9** → Cmaj9. Écoute la descente chromatique D → Db → C à la basse.
+**Étape 3:** Compare les deux à l'oreille. La version tritone a une couleur "Coltrane".`,
+          keyTakeaway: "Tritone sub = remplacer V7 par bII7 (un demi-ton au-dessus de la cible). Crée une descente chromatique élégante."
         },
         {
           id: "5.4",
           title: "Le 'backdoor' (bVII7)",
           duration: "25 min",
           objective: "Utiliser le bVII7 comme dominante alternative.",
-          theory: `**Backdoor progression:** au lieu de résoudre via V7, on résout via **bVII7**.
+          theory: `**Analogie:** d'habitude pour entrer dans une maison, tu passes par la porte d'entrée (= V7 → I, le chemin standard). Le "backdoor" = la **porte de derrière**, un chemin alternatif inattendu mais qui marche aussi.
 
-**En C:**
-- Standard: G7 → Cmaj9
-- Backdoor: **Bb7** → Cmaj9
+---
 
-🎯 **Pourquoi 'backdoor':** Bb7 = V7 de Eb (le relatif majeur de Cm). Donc Bb7 'voudrait' aller à Eb, mais on le détourne vers C. Surprise!
+**Le chemin standard pour aller vers Cmaj9 en C:**
+- **G7 → Cmaj9** (V7 résout sur I, classique)
 
-**Application gospel:** crée une couleur "soul/funk" très Stevie Wonder.
+**Le chemin "backdoor":**
+- **Bb7 → Cmaj9** (bVII7 résout sur I, inattendu mais ça marche!)
 
-**Variante typique:** Fm7 → Bb7 → Cmaj9 (= ii-V de Eb qui résout sur C).`,
-          exercise: `Joue Fmaj9 → Fm9 → Bb7 → Cmaj9. Réalise comment Fm9-Bb7 ressemble à un 2-5 de Eb, mais résout sur C.`,
-          keyTakeaway: "bVII7 = porte dérobée vers le I. Couleur soul/Stevie."
+---
+
+**Mais pourquoi Bb7 marche-t-il pour résoudre sur C?**
+
+Note importante: **Bb7 contient un Ab**. Et Ab → G (de Cmaj9) résout naturellement par demi-ton. Donc l'oreille entend cette résolution douce, même si techniquement Bb7 "voulait" aller vers Eb (le relatif majeur de Cm).
+
+**Tu as détourné l'accord de sa destination naturelle pour l'amener sur C. D'où le nom "backdoor".**
+
+---
+
+**Application gospel typique:**
+
+La progression complète qu'on entend partout en soul/gospel:
+
+**Fmaj9 → Fm9 → Bb7 → Cmaj9**
+
+- **Fmaj9** = IV (chemin classique)
+- **Fm9** = iv (la mineurisation émotionnelle, leçon 4.5)
+- **Bb7** = backdoor (résout sur Cmaj9 de manière inattendue)
+- **Cmaj9** = retour à la tonique
+
+🎯 **Le truc qu'il faut entendre:** Fm9 → Bb7 ressemble à un **2-5 dans la tonalité de Eb majeur**. Mais au lieu de résoudre sur Eb comme prévu, on **détourne** vers Cmaj9.
+
+Cette progression sonne **très Stevie Wonder / Donny Hathaway**, super soul/R&B.`,
+          exercise: `**Étape 1:** Joue Fmaj9 → Fm9 → Bb7 → Cmaj9.
+**Étape 2:** Écoute comment Fm9 → Bb7 "veut" aller à Eb mais finit sur Cmaj9 — c'est la magie de la porte dérobée.
+**Étape 3:** Essaie en F majeur: Bbmaj9 → Bbm9 → Eb7 → Fmaj9.`,
+          keyTakeaway: "Backdoor = bVII7 résout sur I au lieu de son chemin habituel. Couleur soul/R&B très Stevie Wonder."
         },
         {
           id: "5.5",
@@ -1125,42 +1293,115 @@ Sur Cmaj9 → trille rapide entre D et E, résout sur C
           title: "L'improvisation modale",
           duration: "30 min",
           objective: "Improviser en utilisant les modes (dorien, mixolydien, etc.).",
-          theory: `Un **mode** = une gamme majeure jouée en commençant par un degré différent.
+          theory: `**Analogie:** imagine la gamme de DO majeur comme un **livre** avec 7 chapitres. Si tu commences à lire au **chapitre 1**, c'est l'histoire normale (= mode "majeur" / ionien). Si tu commences au **chapitre 2**, c'est la même histoire, **mais racontée d'un autre point de vue**. Mêmes mots, mais ressenti complètement différent.
 
-Les modes gospel-friendly:
+**Un mode = la même gamme, mais démarrée sur une autre note.**
 
-**Dorien (sur ii)** = gamme majeure démarrée sur la 2e
-- Dorien de D = D-E-F-G-A-B-C (= gamme de C démarrée sur D)
-- À jouer sur **Dm7, Dm9** dans la tonalité de C
+---
 
-**Mixolydien (sur V)** = gamme majeure démarrée sur la 5e
-- Mixolydien de G = G-A-B-C-D-E-F (= gamme de C démarrée sur G)
-- À jouer sur **G7, G13** dans la tonalité de C
+**Les 3 modes essentiels pour le gospel:**
 
-**Lydien (sur IV ou Imaj7)** = gamme majeure avec #4
-- Lydien de F = F-G-A-B-C-D-E
-- À jouer sur **Fmaj7, Fmaj9** pour une couleur rêveuse
+**1) Le mode DORIEN — pour les accords mineurs (Dm7, Dm9)**
 
-🎯 **Astuce gospel:** sur une vamp ii-V-I, utilise dorien sur ii, mixolydien sur V, ionien (majeur) sur I.`,
-          exercise: `Sur Dm9 (4 mesures) → G13 (4) → Cmaj9 (4), improvise: dorien sur Dm9, mixolydien sur G13, majeur sur Cmaj9.`,
-          keyTakeaway: "Modes = même notes, accent différent. Crée des couleurs spécifiques sur chaque accord."
+Démarre la gamme de DO sur la note D:
+- D - E - F - G - A - B - C
+- Mêmes notes que C majeur, mais centre sur D
+
+**Quand l'utiliser:** sur **Dm7 ou Dm9** dans la tonalité de C. C'est le son "mineur jazz/gospel" classique.
+
+🎯 Astuce: **tu joues littéralement les touches blanches**, mais en commençant et finissant tes phrases sur D au lieu de C.
+
+---
+
+**2) Le mode MIXOLYDIEN — pour les dominantes 7 (G7, G13)**
+
+Démarre la gamme de DO sur la note G:
+- G - A - B - C - D - E - F
+- Mêmes notes que C majeur, mais centre sur G
+
+**Quand l'utiliser:** sur **G7 ou G13** dans la tonalité de C. C'est **LA gamme à improviser** sur n'importe quelle dominante.
+
+🎯 Astuce: encore **les touches blanches**, mais en démarrant tes phrases sur G.
+
+---
+
+**3) Le mode LYDIEN — pour la couleur "rêveuse" (Fmaj7)**
+
+Démarre la gamme de DO sur la note F:
+- F - G - A - B - C - D - E
+- Le B donne une couleur "flottante" (c'est un #4 par rapport à F)
+
+**Quand l'utiliser:** sur **Fmaj7 ou Fmaj9** pour ajouter une couleur "céleste / planante", très utilisée en worship moderne.
+
+---
+
+**🎯 La magie de tout ça:**
+
+Sur un 2-5-1 en C (Dm9 → G13 → Cmaj9), tu peux **rester sur les touches blanches** pendant toute la progression. Ce qui change, c'est juste **sur quelle note tu commences et reposes** tes phrases:
+
+- Sur **Dm9**, vise le **D** comme note d'arrivée
+- Sur **G13**, vise le **G** comme note d'arrivée  
+- Sur **Cmaj9**, vise le **C** comme note d'arrivée
+
+Tu improvises littéralement avec **7 notes**, mais ça sonne **complètement différent** selon l'accord en-dessous. C'est ça le secret modal.`,
+          exercise: `**Étape 1:** Joue Dm9 main gauche, puis avec la main droite, fais des petites phrases en touches blanches **qui finissent sur D**.
+**Étape 2:** Passe à G13 main gauche, joue des phrases en touches blanches **qui finissent sur G**.
+**Étape 3:** Passe à Cmaj9, phrases en touches blanches **qui finissent sur C**.
+
+Pareil pour les notes, juste le "centre" change.`,
+          keyTakeaway: "Modes = mêmes notes, accent différent. Sur un 2-5-1 en C, tu peux improviser en touches blanches pendant tout le morceau."
         },
         {
           id: "7.6",
           title: "Les 'enclosures' chromatiques",
           duration: "25 min",
           objective: "Approcher une note cible par des notes chromatiques voisines.",
-          theory: `**Enclosure** = encercler une note avec ses voisines (au-dessus et en-dessous) avant de la jouer.
+          theory: `**Analogie:** tu veux annoncer une bonne nouvelle à quelqu'un. Tu peux soit lui dire **directement** ("J'ai gagné au loto!"), soit créer du **suspense** ("Devine quoi... non c'est pas ça... attends... J'AI GAGNÉ AU LOTO!"). L'enclosure, c'est créer ce suspense avant de jouer la note "bonne nouvelle".
 
-**Exemple:** cible = E (3e de C).
-- Encerclage simple: F → D# → **E**
-- Encerclage double: F → Eb → D# → **E**
+---
 
-🎯 **Effet:** crée une tension chromatique avant la résolution sur la note "juste". Hyper utilisé en jazz et gospel sophistiqué.
+**Le principe simple:**
 
-**Application:** quand tu improvises et que tu veux viser une note d'accord, encercle-la d'abord.`,
-          exercise: `Sur Cmaj9, joue un lick qui encercle la note **G** (5e): A → F# → G → tient.`,
-          keyTakeaway: "Enclosure = tension chromatique vers la note cible. Sonne jazz/gospel sophistiqué."
+Au lieu de jouer directement ta note cible, tu **l'encercles** d'abord avec ses voisines (au-dessus et en-dessous), puis tu **résous** sur elle.
+
+---
+
+**Exemple ultra-concret — cible = E (sur un accord Cmaj9):**
+
+**Sans enclosure (direct):**
+- Tu joues juste **E**. Boring.
+
+**Avec enclosure simple (3 notes):**
+- **F** (au-dessus de E) → **D#** (en-dessous de E) → **E** (la cible, enfin!)
+- Effet: petite tension chromatique avant que ça se résolve
+
+**Avec enclosure double (4 notes):**
+- **F** → **Eb** → **D#** → **E**
+- Encore plus de suspense, ça sonne très jazz
+
+---
+
+**Quand l'utiliser?**
+
+À l'improvisation, quand tu veux **mettre l'accent** sur une note de l'accord (typiquement la 3 ou la 5). Au lieu d'arriver dessus "platement", tu fais 2-3 notes d'approche qui rendent l'arrivée plus puissante.
+
+🎯 **Truc gospel:** dans un solo, choisis **la note la plus expressive** de l'accord (souvent la 3 ou la 9), et joue une enclosure dessus à la fin de ta phrase. Ça crée un point d'arrivée très expressif.
+
+---
+
+**Mémorise cette formule de base:**
+
+Pour encercler n'importe quelle note X:
+1. Joue la note **juste au-dessus de X** (1 demi-ton plus haut)
+2. Joue la note **juste en-dessous de X** (1 demi-ton plus bas)
+3. **Résous sur X**
+
+C'est tout. 3 notes, mais l'effet est énorme.`,
+          exercise: `Sur Cmaj9 (tiens-le main gauche), main droite:
+**Étape 1** (direct): joue juste G (la 5e). 
+**Étape 2** (enclosure simple): joue **A** → **F#** → **G** et tiens. 
+**Étape 3:** sens la différence d'expressivité. La version 2 a 10x plus de caractère.`,
+          keyTakeaway: "Enclosure = créer du suspense en encerclant une note cible avant de la jouer. Effet jazz/gospel instantané."
         },
         {
           id: "7.7",

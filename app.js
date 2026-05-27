@@ -682,6 +682,88 @@ function renderReferencesSection(lessonId) {
 }
 
 // ============================================================
+// QUIZZES — questions de révision
+// ============================================================
+
+function renderQuizSection(lessonId) {
+  if (typeof LESSON_QUIZZES === 'undefined') return '';
+  const questions = LESSON_QUIZZES[lessonId];
+  if (!questions || questions.length === 0) return '';
+
+  const quizId = `quiz-${lessonId.replace('.', '-')}`;
+  const questionsHTML = questions.map((q, qIdx) => {
+    const optionsHTML = q.options.map((opt, oIdx) => `
+      <button class="quiz-option"
+              data-quiz="${quizId}"
+              data-q="${qIdx}"
+              data-opt="${oIdx}"
+              data-correct="${q.correctIdx}"
+              onclick="checkQuizAnswer(this)">
+        <span class="quiz-option-letter">${String.fromCharCode(65 + oIdx)}</span>
+        <span class="quiz-option-text">${opt}</span>
+      </button>
+    `).join('');
+
+    return `
+      <div class="quiz-question" data-q-idx="${qIdx}">
+        <div class="quiz-question-text">
+          <span class="quiz-question-num">${qIdx + 1}</span>
+          ${q.question}
+        </div>
+        <div class="quiz-options">${optionsHTML}</div>
+        <div class="quiz-feedback hidden" id="${quizId}-feedback-${qIdx}">
+          <div class="quiz-feedback-text">${q.explanation}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <section class="lesson-section">
+      <div class="lesson-section-title">Quiz</div>
+      <div class="quiz-intro">Teste tes connaissances. ${questions.length} question${questions.length > 1 ? 's' : ''}.</div>
+      <div class="quiz-container">${questionsHTML}</div>
+    </section>
+  `;
+}
+
+function checkQuizAnswer(btn) {
+  const quizId = btn.getAttribute('data-quiz');
+  const qIdx = parseInt(btn.getAttribute('data-q'), 10);
+  const selectedOpt = parseInt(btn.getAttribute('data-opt'), 10);
+  const correctOpt = parseInt(btn.getAttribute('data-correct'), 10);
+
+  const allButtons = document.querySelectorAll(
+    `.quiz-option[data-quiz="${quizId}"][data-q="${qIdx}"]`
+  );
+
+  // If already answered, ignore
+  if (Array.from(allButtons).some(b => b.classList.contains('answered'))) return;
+
+  // Mark all as answered, highlight correct and selected
+  allButtons.forEach(b => {
+    b.classList.add('answered');
+    const optIdx = parseInt(b.getAttribute('data-opt'), 10);
+    if (optIdx === correctOpt) {
+      b.classList.add('correct');
+    } else if (optIdx === selectedOpt) {
+      b.classList.add('incorrect');
+    }
+  });
+
+  // Show explanation
+  const feedback = document.getElementById(`${quizId}-feedback-${qIdx}`);
+  if (feedback) {
+    feedback.classList.remove('hidden');
+    if (selectedOpt === correctOpt) {
+      feedback.classList.add('correct');
+    } else {
+      feedback.classList.add('incorrect');
+    }
+  }
+}
+
+// ============================================================
 // REPERTOIRE VIEW
 // ============================================================
 
@@ -932,6 +1014,8 @@ function openLesson(lessonId) {
         <div class="takeaway-text">${foundLesson.keyTakeaway}</div>
       </div>
     </section>
+
+    ${renderQuizSection(lessonId)}
 
     ${renderReferencesSection(lessonId)}
 
